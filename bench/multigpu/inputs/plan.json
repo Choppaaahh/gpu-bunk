@@ -1,0 +1,216 @@
+{
+ "version": "v1",
+ "note": "Frozen with reports/multigpu_probe_prereg_2026-10-14.md. Sizes from the HF API (read 2026-10-14). est_min feeds the driver's budget guard.",
+ "models": {
+  "q8": {
+   "repo": "Qwen/Qwen3-8B",
+   "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+   "bytes": 16381516776,
+   "max_model_len": 16640,
+   "kv_bpt": 147456
+  },
+  "dsv2": {
+   "repo": "deepseek-ai/DeepSeek-V2-Lite-Chat",
+   "revision": "85864749cd611b4353ce1decdb286193298f64c7",
+   "bytes": 31413626576,
+   "max_model_len": 8192,
+   "moe_layers": 26,
+   "first_dense": 1,
+   "n_experts": 64,
+   "top_k": 6,
+   "expert_bytes": 17301504,
+   "layer_expert_gib": 1.03125,
+   "kv_bpt": 31104
+  }
+ },
+ "order": [
+  "CTRL",
+  "BETA_IDLE",
+  "BETA_BUSY",
+  "ITEM12",
+  "ITEM10",
+  "ITEM9",
+  "ITEM8",
+  "DCP"
+ ],
+ "est_min": {
+  "CTRL": 8,
+  "BETA_IDLE": 9,
+  "BETA_BUSY": 12,
+  "ITEM12": 6,
+  "ITEM10": 30,
+  "ITEM9": 16,
+  "ITEM8": 10,
+  "DCP": 13
+ },
+ "gates": {
+  "g4_min_tflops": 200,
+  "nvlink_min_gbs": 150,
+  "net_min_Bps": 40000000,
+  "g6_tol": 0.5
+ },
+ "ctrl": {
+  "conc": 8,
+  "in": 512,
+  "out": 128,
+  "secs": 30
+ },
+ "anchor": {
+  "cells": [
+   {
+    "name": "Q",
+    "B": 1,
+    "L": 4096
+   },
+   {
+    "name": "S",
+    "B": 8,
+    "L": 4096
+   },
+   {
+    "name": "LC",
+    "B": 2,
+    "L": 16384
+   }
+  ],
+  "out": 64,
+  "passes": 3,
+  "warm_rounds": 2
+ },
+ "beta": {
+  "geom": "qwen3_8b",
+  "cells": [
+   {
+    "name": "Q",
+    "B": 1,
+    "L": 4096
+   },
+   {
+    "name": "S",
+    "B": 8,
+    "L": 4096
+   },
+   {
+    "name": "LC",
+    "B": 2,
+    "L": 16384
+   }
+  ],
+  "f": [
+   0.125,
+   0.25,
+   0.5,
+   0.875
+  ],
+  "modes": [
+   "PUSH",
+   "PULL",
+   "PULLS"
+  ],
+  "passes": 3,
+  "warm_steps": 10,
+  "timed_steps": 50
+ },
+ "lender": {
+  "util": 0.55,
+  "conc": 8,
+  "in": 512,
+  "out": 256,
+  "settle_s": 30
+ },
+ "item12": {
+  "P": 64,
+  "out": 64,
+  "Bs": [
+   1,
+   4,
+   16,
+   64
+  ],
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "seed": 2746
+ },
+ "item10": {
+  "L_off": [
+   0,
+   13,
+   20,
+   26
+  ],
+  "Bs": [
+   1,
+   4,
+   16
+  ],
+  "in": 256,
+  "out": 32,
+  "passes": 3,
+  "util": 0.92
+ },
+ "item9": {
+  "same": {
+   "n_live": 8,
+   "live_in": 512,
+   "live_out": 32,
+   "live_gap_s": 5,
+   "batch_conc": 32,
+   "batch_in": 512,
+   "batch_out": 1024,
+   "batch_settle_s": 20,
+   "variants": [
+    {
+     "name": "ample",
+     "kv_bytes": null
+    },
+    {
+     "name": "full",
+     "kv_bytes": 2147483648
+    }
+   ]
+  },
+  "other": {
+   "util": 0.46,
+   "modes": [
+    "abort",
+    "wait"
+   ],
+   "reps": 5,
+   "batch_conc": 8,
+   "batch_in": 512,
+   "batch_out": 512,
+   "batch_settle_s": 10,
+   "live_in": 512,
+   "live_out": 32
+  }
+ },
+ "item8": {
+  "kv_bytes": 2147483648,
+  "rate": 2.0,
+  "secs": 60,
+  "in": 1024,
+  "out": 512,
+  "timeout_s": 10.0,
+  "seed": 2746,
+  "join_cap_s": 420,
+  "tail_s": 20,
+  "drain_cap_s": 300
+ },
+ "dcp": {
+  "cells": [
+   {
+    "name": "c1",
+    "B": 1,
+    "L": 4096
+   },
+   {
+    "name": "c8",
+    "B": 8,
+    "L": 4096
+   }
+  ],
+  "out": 64,
+  "passes": 3,
+  "util": 0.85
+ }
+}

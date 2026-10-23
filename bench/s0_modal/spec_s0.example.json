@@ -1,0 +1,39 @@
+{
+ "tag": "s0",
+ "out": "runs/s0",
+ "harness_dir": "bench/s0_modal",
+ "extra_files": [
+  "scripts/warm_wake_ext.py",
+  "scripts/fabric_ctl.py"
+ ],
+ "exclude": [
+  "__pycache__",
+  "rows",
+  "logs",
+  "ctl_logs",
+  "ctl_cfg.json"
+ ],
+ "workdir": "/root/s0",
+ "mkdirs": [
+  "rows",
+  "logs",
+  "ctl_logs"
+ ],
+ "prep": [],
+ "cmd": "bash run_s0.sh",
+ "env": {
+  "S0_DEADLINE_REL": "1860"
+ },
+ "items": [
+  "rows",
+  "logs",
+  "ctl_logs",
+  "ctl_cfg.json"
+ ],
+ "gpu": "A100-80GB:2",
+ "cpu": 12,
+ "mem_mib": 49152,
+ "mem_limit_mib": 131072,
+ "timeout_s": 1980,
+ "cmd_timeout_s": 1900
+}

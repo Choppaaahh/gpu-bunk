@@ -1,0 +1,166 @@
+From d49761ebccb59c465be36f04c839a5b0b185408b Mon Sep 17 00:00:00 2001
+From: gpu-bunk <noreply@example.invalid>
+Date: Tue, 13 Oct 2026 06:19:13 -0400
+Subject: [PATCH 5/5] Hold reclaimed blocks for the woken model until its
+ admitted prefill completes
+
+Without the hold, models trade the same blocks back and forth.
+---
+ vllm/v1/core/sched/meta_scheduler.py | 73 +++++++++++++++++++++++++++-
+ vllm/v1/core/shared_kv.py            | 14 ++++++
+ 2 files changed, 86 insertions(+), 1 deletion(-)
+
+diff --git a/vllm/v1/core/sched/meta_scheduler.py b/vllm/v1/core/sched/meta_scheduler.py
+index 7ba3b12..62e1822 100644
+--- a/vllm/v1/core/sched/meta_scheduler.py
++++ b/vllm/v1/core/sched/meta_scheduler.py
+@@ -23,6 +23,14 @@ engines may have a batch launched at once from one thread. Two rules make that s
+    A block a model frees in update_from_output is safe to hand out: that call runs
+    after the host has synchronized on the model's sampled tokens, which are produced
+    on the same stream after every KV write of that step (sync scheduling only).
++
++Hold: after a non-empty reclaim for W's head h, the reclaimed amount is HELD for
++W until h's admitted prefill completes: every other model's pool view reports that many
++fewer free blocks (`SharedKVPool.reservations`), shrinking as h allocates. Without it,
++under chunked prefill the borrower re-admits into the freed blocks before h's next chunk,
++h self-preempts and the reclaim fires again (ping-pong). The hold is released when h is
++gone (finished/aborted), its prefill completes, or after `hold_max_turns` of W's turns.
++(The hold logic runs inside the lock from patch 0004; the in-flight victim rule is kept.)
+ """
+ 
+ from __future__ import annotations
+@@ -80,6 +88,26 @@ class MetaEvent:
+     waiting_floor: int
+ 
+ 
++@dataclass
++class Hold:
++    model: str
++    req_id: str
++    target_blocks: int
++    prefill_tokens: int
++    created_turn: int
++    age: int = 0
++    remaining: int = 0
++
++
++@dataclass
++class HoldRelease:
++    turn: int
++    model: str
++    req_id: str
++    reason: str  # gone | prefill_done | timeout
++    age: int
++
++
+ @dataclass
+ class MetaScheduler:
+     shared: SharedKVPool
+@@ -90,6 +118,12 @@ class MetaScheduler:
+     lock: threading.RLock = field(default_factory=threading.RLock)
+     in_flight: set = field(default_factory=set)
+     skipped_in_flight: int = 0
++    hold: bool = True
++    hold_max_turns: int = 8
++    holds: dict = field(default_factory=dict)  # (model, req_id) -> Hold
++    hold_log: list[HoldRelease] = field(default_factory=list)
++    holds_created: int = 0
++    turn: int = 0  # arbitrate() calls, any model
+ 
+     def _req_blocks(self, sched, req) -> int:
+         ids = sched.kv_cache_manager.get_block_ids(req.request_id)
+@@ -98,14 +132,43 @@ class MetaScheduler:
+     def _need(self, sched, req) -> int:
+         return cdiv(req.num_tokens, sched.block_size)
+ 
++    def _refresh_holds(self, model: str) -> None:
++        """Age the caller's holds, release finished ones, publish the remaining counts."""
++        for key in list(self.holds):
++            h = self.holds[key]
++            sched = self.engines[h.model]
++            if h.model == model:
++                h.age += 1
++            req = sched.requests.get(h.req_id)
++            reason = None
++            if req is None or req.is_finished():
++                reason = "gone"
++            elif req.num_computed_tokens >= h.prefill_tokens:
++                reason = "prefill_done"
++            elif h.age >= self.hold_max_turns:
++                reason = "timeout"
++            if reason is not None:
++                del self.holds[key]
++                self.hold_log.append(HoldRelease(self.turn, h.model, h.req_id, reason, h.age))
++                continue
++            h.remaining = max(0, h.target_blocks - self._req_blocks(sched, req))
++        res: dict[str, int] = {}
++        for h in self.holds.values():
++            res[h.model] = res.get(h.model, 0) + h.remaining
++        self.shared.reservations = res
++
+     def arbitrate(self, model: str) -> None:
+         with self.lock:
++            self.turn += 1
++            if self.holds or self.shared.reservations:
++                self._refresh_holds(model)
+             sched = self.engines[model]
+             if not sched.waiting:
+                 return
+             head = sched.waiting.peek_request()
+             held = {m: self.shared.held(m) for m in self.engines}
+-            free = self.shared.base.get_num_free_blocks()
++            free = max(0, self.shared.base.get_num_free_blocks()
++                       - sum(self.shared.reservations.values()))
+             need = self._need(sched, head)
+             victim_blocks = {
+                 m: ([] if (m != model and m in self.in_flight) else
+@@ -129,6 +192,14 @@ class MetaScheduler:
+                 self.events.append(MetaEvent(self.step_no, model, victim,
+                                              req.request_id, held[model],
+                                              self.floors[model]))
++            if plan and self.hold:
++                h = Hold(model, head.request_id, need, head.num_tokens, self.turn)
++                h.remaining = max(0, need - self._req_blocks(sched, head))
++                self.holds[(model, head.request_id)] = h
++                self.holds_created += 1
++                res = dict(self.shared.reservations)
++                res[model] = sum(x.remaining for x in self.holds.values() if x.model == model)
++                self.shared.reservations = res
+ 
+     def guard(self, model: str) -> None:
+         """Wrap `engines[model]`'s pool-touching methods with the lock and track
+diff --git a/vllm/v1/core/shared_kv.py b/vllm/v1/core/shared_kv.py
+index b6a4e05..2eb97ee 100644
+--- a/vllm/v1/core/shared_kv.py
++++ b/vllm/v1/core/shared_kv.py
+@@ -62,6 +62,14 @@ class SharedKVPool:
+         # block_id -> model name of the current (or, for cached free blocks, last) owner.
+         self.owner: dict[int, str] = {}
+         self.views: dict[str, EngineBlockPool] = {}
++        # Blocks currently held FOR a model: every OTHER model's view
++        # reports that many fewer free blocks. A count, not pinned blocks, so nothing
++        # can be stranded. Written by the meta-scheduler.
++        self.reservations: dict[str, int] = {}
++
++    def reserved_against(self, model: str) -> int:
++        """Free blocks `model` must leave alone: the sum of other models' holds."""
++        return sum(n for m, n in self.reservations.items() if m != model)
+ 
+     def view(
+         self, model: str, hash_block_size: int, enable_caching: bool, **kw
+@@ -117,6 +125,12 @@ class EngineBlockPool(BlockPool):
+         self.kv_event_queue = []
+         self.metrics_collector = metrics_collector
+ 
++    def get_num_free_blocks(self) -> int:
++        # Hide blocks held for another model, so this model's stock admission and
++        # allocation paths cannot take them back mid-prefill.
++        free = self.free_block_queue.num_free_blocks
++        return max(0, free - self.shared.reserved_against(self.model))
++
+     # ---- ownership -------------------------------------------------------
+     def _check_owned(self, blocks: Iterable[KVCacheBlock], what: str) -> None:
+         for b in blocks:
+-- 
+2.39.5
+

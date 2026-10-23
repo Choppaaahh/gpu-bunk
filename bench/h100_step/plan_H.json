@@ -1,0 +1,43 @@
+{
+ "arm": "H",
+ "prereg": "private prereg, frozen before any GPU minute",
+ "util": 0.9,
+ "min_s_before_boot": 300,
+ "card": {
+  "name_contains": "H100 80GB HBM3",
+  "mem_min_mib": 79000,
+  "mem_max_mib": 82000,
+  "pmax_min_w": 600,
+  "d2d_min_gbs": 2345
+ },
+ "ctrl": {
+  "conc": 8,
+  "in": 512,
+  "out": 128,
+  "secs": 30
+ },
+ "models": [
+  [
+   "q8",
+   {
+    "repo": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "bytes": 16381516776,
+    "max_model_len": 16640,
+    "kv_bpt": 147456,
+    "g6": true
+   }
+  ],
+  [
+   "q14",
+   {
+    "repo": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "bytes": 29536665640,
+    "max_model_len": 16640,
+    "kv_bpt": 163840
+   }
+  ]
+ ],
+ "max_dl_wait_s": 300
+}

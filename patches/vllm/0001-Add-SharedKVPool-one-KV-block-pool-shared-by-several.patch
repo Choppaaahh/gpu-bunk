@@ -1,0 +1,264 @@
+From d1788fdf8ab6dba8430734bf900e15ca4dbbda74 Mon Sep 17 00:00:00 2001
+From: gpu-bunk <noreply@example.invalid>
+Date: Mon, 12 Oct 2026 17:15:06 -0400
+Subject: [PATCH 1/5] Add SharedKVPool: one KV block pool shared by several
+ engines, each with its own view
+
+Each engine gets a view of one block pool, one free queue and one prefix-cache
+map, with block ownership and its own prefix-cache namespace.
+---
+ vllm/v1/core/shared_kv.py | 242 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 242 insertions(+)
+ create mode 100644 vllm/v1/core/shared_kv.py
+
+diff --git a/vllm/v1/core/shared_kv.py b/vllm/v1/core/shared_kv.py
+new file mode 100644
+index 0000000..b6a4e05
+--- /dev/null
++++ b/vllm/v1/core/shared_kv.py
+@@ -0,0 +1,242 @@
++# SPDX-License-Identifier: Apache-2.0
++"""Several independent models in ONE process over ONE KV block pool.
++
++A `SharedKVPool` owns the blocks, the free queue and the prefix-cache map. Each engine
++gets an `EngineBlockPool` view that shares those structures by reference and adds:
++
++* block OWNERSHIP: a block handed to one model can only be freed / touched by it;
++* a per-model NAMESPACE on prefix-cache keys (group-id offset), so an identical
++  prompt sent to two models never hits the other model's cached KV;
++* its own `hash_block_size`, `enable_caching`, event queue and metrics.
++
++Engines pick their view up at construction through `engine_scope(binding)`, which
++the three seams read: the coordinator's `BlockPool(...)`, the bytes-per-block of the
++KV config (forced to the common unit U), and the KV buffer allocation (one shared
++buffer). Outside an `engine_scope` every seam behaves exactly like stock vLLM.
++"""
++
++from __future__ import annotations
++
++import contextlib
++import contextvars
++from collections.abc import Iterable, Iterator, Sequence
++from dataclasses import dataclass
++
++import torch
++
++from vllm.v1.core.block_pool import BlockPool
++from vllm.v1.core.kv_cache_utils import KVCacheBlock
++
++# Namespace bits sit above any real group id (models have far fewer than 2**16 groups).
++NAMESPACE_SHIFT = 16
++
++
++class CrossModelOwnershipError(RuntimeError):
++    """A model tried to free or touch a block owned by another model."""
++
++
++class SharedKVPool:
++    """One block pool (and optionally one KV byte buffer) shared by N models."""
++
++    def __init__(
++        self,
++        num_blocks: int,
++        bytes_per_block: int,
++        kv_buffer: torch.Tensor | None = None,
++    ):
++        self.num_blocks = num_blocks
++        self.bytes_per_block = bytes_per_block
++        if kv_buffer is not None:
++            assert kv_buffer.dtype == torch.int8 and kv_buffer.dim() == 1
++            assert kv_buffer.numel() == num_blocks * bytes_per_block, (
++                f"shared KV buffer is {kv_buffer.numel()} B, "
++                f"expected {num_blocks} x {bytes_per_block}"
++            )
++        self.kv_buffer = kv_buffer
++        # The base pool supplies the shared structures; caching is decided per view.
++        self.base = BlockPool(num_blocks, enable_caching=False, hash_block_size=1)
++        for block in self.base.blocks:
++            # Shared blocks belong to no single view: stock free_blocks() would
++            # route a block whose pool is not `self` to that pool.
++            block.pool = None
++        # block_id -> model name of the current (or, for cached free blocks, last) owner.
++        self.owner: dict[int, str] = {}
++        self.views: dict[str, EngineBlockPool] = {}
++
++    def view(
++        self, model: str, hash_block_size: int, enable_caching: bool, **kw
++    ) -> EngineBlockPool:
++        assert model not in self.views, f"model {model!r} already has a view"
++        v = EngineBlockPool(self, model, len(self.views), hash_block_size,
++                            enable_caching, **kw)
++        self.views[model] = v
++        return v
++
++    def held(self, model: str) -> int:
++        """Blocks with ref_cnt > 0 owned by `model`."""
++        return sum(
++            1 for bid, m in self.owner.items()
++            if m == model and self.base.blocks[bid].ref_cnt > 0
++        )
++
++    def check_invariants(self) -> None:
++        """Every in-use block has exactly one owner; free + in-use == usable."""
++        in_use = [b for b in self.base.blocks if b.ref_cnt > 0 and not b.is_null]
++        for b in in_use:
++            assert b.block_id in self.owner, f"block {b.block_id} in use, no owner"
++        free = self.base.get_num_free_blocks()
++        assert free + len(in_use) == self.num_blocks - 1, (
++            f"free {free} + in-use {len(in_use)} != usable {self.num_blocks - 1}"
++        )
++
++
++class EngineBlockPool(BlockPool):
++    """One model's view of a `SharedKVPool` (does not call BlockPool.__init__)."""
++
++    def __init__(self, shared: SharedKVPool, model: str, index: int,
++                 hash_block_size: int, enable_caching: bool,
++                 enable_kv_cache_events: bool = False, metrics_collector=None,
++                 medium: str | None = None, namespace: bool = True):
++        base = shared.base
++        self.shared = shared
++        self.model = model
++        self.group_id_offset = (index << NAMESPACE_SHIFT) if namespace else 0
++        # Shared by reference with every other view.
++        self.num_gpu_blocks = base.num_gpu_blocks
++        self.blocks = base.blocks
++        self.free_block_queue = base.free_block_queue
++        self.cached_block_hash_to_block = base.cached_block_hash_to_block
++        self.cached_block_hashes_by_block = base.cached_block_hashes_by_block
++        self.null_block = base.null_block
++        self._reuse_watchers = base._reuse_watchers
++        # Per model.
++        self.medium = medium or base.medium
++        self.enable_caching = enable_caching
++        self.hash_block_size = hash_block_size
++        self.enable_kv_cache_events = enable_kv_cache_events
++        self.kv_event_queue = []
++        self.metrics_collector = metrics_collector
++
++    # ---- ownership -------------------------------------------------------
++    def _check_owned(self, blocks: Iterable[KVCacheBlock], what: str) -> None:
++        for b in blocks:
++            if b.is_null:
++                continue
++            owner = self.shared.owner.get(b.block_id)
++            if owner != self.model:
++                raise CrossModelOwnershipError(
++                    f"{self.model} tried to {what} block {b.block_id} owned by {owner}"
++                )
++
++    def get_new_blocks(self, num_blocks: int) -> list[KVCacheBlock]:
++        ret = super().get_new_blocks(num_blocks)
++        for b in ret:
++            self.shared.owner[b.block_id] = self.model
++        return ret
++
++    def free_blocks(self, ordered_blocks: Iterable[KVCacheBlock]) -> None:
++        blocks = list(ordered_blocks)
++        self._check_owned(blocks, "free")
++        super().free_blocks(blocks)
++
++    def touch(self, blocks: Sequence[KVCacheBlock]) -> None:
++        self._check_owned(blocks, "touch")
++        super().touch(blocks)
++
++    def evict_blocks(self, block_ids: set[int]) -> None:
++        self._check_owned((self.blocks[i] for i in block_ids), "evict")
++        super().evict_blocks(block_ids)
++
++    def reset_prefix_cache(self) -> bool:
++        # Stock reset clears the SHARED cache map, i.e. every model's prefixes.
++        raise NotImplementedError("reset_prefix_cache on a shared pool")
++
++    # ---- per-model namespace on prefix-cache keys ------------------------
++    def get_cached_block(self, block_hash, kv_cache_group_ids: list[int]):
++        return super().get_cached_block(
++            block_hash, [g + self.group_id_offset for g in kv_cache_group_ids]
++        )
++
++    def cache_full_blocks(self, request, blocks, num_cached_blocks,
++                          num_full_blocks, block_size, kv_cache_group_id,
++                          block_mask=None):
++        return super().cache_full_blocks(
++            request, blocks, num_cached_blocks, num_full_blocks, block_size,
++            kv_cache_group_id + self.group_id_offset, block_mask,
++        )
++
++    def cache_partial_block(self, request, block, num_tokens, kv_cache_group_id,
++                            block_size, replace_existing_hashes=False):
++        return super().cache_partial_block(
++            request, block, num_tokens, kv_cache_group_id + self.group_id_offset,
++            block_size, replace_existing_hashes,
++        )
++    # emit_cached_block_events only builds an event (no key lookup), so it keeps the
++    # real group id; cache_full_blocks' own events carry the offset id (KV events off).
++
++
++# ---- construction-time injection (read by the seams) ---------------------
++@dataclass
++class EngineBinding:
++    pool_view: EngineBlockPool | None = None
++    bytes_per_block: int | None = None
++    kv_buffer: torch.Tensor | None = None
++
++
++_ACTIVE: contextvars.ContextVar[EngineBinding | None] = contextvars.ContextVar(
++    "gpu_bunk_shared_kv_binding", default=None
++)
++
++
++@contextlib.contextmanager
++def engine_scope(binding: EngineBinding) -> Iterator[EngineBinding]:
++    token = _ACTIVE.set(binding)
++    try:
++        yield binding
++    finally:
++        _ACTIVE.reset(token)
++
++
++def binding_for(shared: SharedKVPool, view: EngineBlockPool | None) -> EngineBinding:
++    return EngineBinding(view, shared.bytes_per_block, shared.kv_buffer)
++
++
++def injected_block_pool(num_blocks: int, enable_caching: bool,
++                        hash_block_size: int) -> BlockPool | None:
++    b = _ACTIVE.get()
++    if b is None or b.pool_view is None:
++        return None
++    v = b.pool_view
++    if num_blocks != v.num_gpu_blocks:
++        raise ValueError(
++            f"engine wants {num_blocks} blocks, shared pool has {v.num_gpu_blocks}"
++        )
++    if enable_caching != v.enable_caching or hash_block_size != v.hash_block_size:
++        raise ValueError(
++            f"view for {v.model} built with caching={v.enable_caching} "
++            f"hash_block_size={v.hash_block_size}, engine wants "
++            f"{enable_caching}/{hash_block_size}"
++        )
++    return v
++
++
++def bytes_per_block_override(natural: int) -> int | None:
++    b = _ACTIVE.get()
++    if b is None or b.bytes_per_block is None:
++        return None
++    if b.bytes_per_block < natural:
++        raise ValueError(
++            f"shared unit U={b.bytes_per_block} B < this model's block {natural} B"
++        )
++    return b.bytes_per_block
++
++
++def injected_kv_buffer(buf_size: int) -> torch.Tensor | None:
++    b = _ACTIVE.get()
++    if b is None or b.kv_buffer is None:
++        return None
++    if b.kv_buffer.numel() != buf_size:
++        raise ValueError(
++            f"shared KV buffer {b.kv_buffer.numel()} B != engine's {buf_size} B"
++        )
++    return b.kv_buffer
+-- 
+2.39.5
+

@@ -1,0 +1,1592 @@
+{
+ "status_all": {
+  "RESOLVED": 172,
+  "UNMAPPED": 333,
+  "GONE": 184
+ },
+ "status_custom": {
+  "RESOLVED": 139,
+  "UNMAPPED": 333,
+  "GONE": 184
+ },
+ "readability": {
+  "READ": 156,
+  "UNREADABLE:quant-layout": 11,
+  "UNREADABLE:packed-quant": 5
+ },
+ "n_repos_resolved": 172,
+ "n_models_resolved": 172,
+ "pop_work": 115247073879.0,
+ "pop_custom_work": 59580737751.0,
+ "dup_labels": {
+  "identical": 62
+ },
+ "n_bitwise_pairs": 9,
+ "n_rescaled_nonfn_pairs": 11,
+ "validation": {
+  "failed": [],
+  "validated": 20
+ },
+ "distinct_sets_all": 134,
+ "distinct_sets_strict": 145,
+ "lineages": 78,
+ "lineages_sensitivity": {
+  "0.02": 93,
+  "0.1": 67
+ },
+ "by_size_all": {
+  "XL20-40B": {
+   "models": 23,
+   "repos": 23,
+   "sets": 17,
+   "work": 7760320593.0,
+   "unreadable": 0
+  },
+  "MoE": {
+   "models": 71,
+   "repos": 71,
+   "sets": 57,
+   "work": 49066724053.0,
+   "unreadable": 11
+  },
+  "S<=5B": {
+   "models": 46,
+   "repos": 46,
+   "sets": 34,
+   "work": 3301871658.0,
+   "unreadable": 0
+  },
+  "XXL>40B": {
+   "models": 12,
+   "repos": 12,
+   "sets": 9,
+   "work": 9947694002.0,
+   "unreadable": 1
+  },
+  "L10-20B": {
+   "models": 18,
+   "repos": 18,
+   "sets": 15,
+   "work": 2971646696.0,
+   "unreadable": 0
+  },
+  "M5-10B": {
+   "models": 2,
+   "repos": 2,
+   "sets": 2,
+   "work": 651413517.0,
+   "unreadable": 0
+  }
+ },
+ "by_size_custom": {
+  "XL20-40B": {
+   "models": 20,
+   "repos": 20,
+   "sets": 14,
+   "work": 3052154677.0,
+   "unreadable": 0
+  },
+  "MoE": {
+   "models": 50,
+   "repos": 50,
+   "sets": 42,
+   "work": 5649395947.0,
+   "unreadable": 8
+  },
+  "S<=5B": {
+   "models": 42,
+   "repos": 42,
+   "sets": 30,
+   "work": 2825354904.0,
+   "unreadable": 0
+  },
+  "XXL>40B": {
+   "models": 9,
+   "repos": 9,
+   "sets": 6,
+   "work": 4478807682.0,
+   "unreadable": 1
+  },
+  "L10-20B": {
+   "models": 16,
+   "repos": 16,
+   "sets": 13,
+   "work": 1376207664.0,
+   "unreadable": 0
+  },
+  "M5-10B": {
+   "models": 2,
+   "repos": 2,
+   "sets": 2,
+   "work": 651413517.0,
+   "unreadable": 0
+  }
+ },
+ "by_size_custom_strict": {
+  "XL20-40B": {
+   "models": 20,
+   "repos": 20,
+   "sets": 14,
+   "work": 3052154677.0,
+   "unreadable": 0
+  },
+  "MoE": {
+   "models": 50,
+   "repos": 50,
+   "sets": 44,
+   "work": 5649395947.0,
+   "unreadable": 8
+  },
+  "S<=5B": {
+   "models": 42,
+   "repos": 42,
+   "sets": 36,
+   "work": 2825354904.0,
+   "unreadable": 0
+  },
+  "XXL>40B": {
+   "models": 9,
+   "repos": 9,
+   "sets": 7,
+   "work": 4478807682.0,
+   "unreadable": 1
+  },
+  "L10-20B": {
+   "models": 16,
+   "repos": 16,
+   "sets": 14,
+   "work": 1376207664.0,
+   "unreadable": 0
+  },
+  "M5-10B": {
+   "models": 2,
+   "repos": 2,
+   "sets": 2,
+   "work": 651413517.0,
+   "unreadable": 0
+  }
+ },
+ "lineages_by_size_custom": {
+  "S<=5B": {
+   "models": 42,
+   "repos": 42,
+   "sets": 9,
+   "work": 2825354904.0,
+   "unreadable": 0
+  },
+  "XL20-40B": {
+   "models": 20,
+   "repos": 20,
+   "sets": 5,
+   "work": 3052154677.0,
+   "unreadable": 0
+  },
+  "L10-20B": {
+   "models": 16,
+   "repos": 16,
+   "sets": 3,
+   "work": 1376207664.0,
+   "unreadable": 0
+  },
+  "MoE": {
+   "models": 50,
+   "repos": 50,
+   "sets": 29,
+   "work": 5649395947.0,
+   "unreadable": 8
+  },
+  "XXL>40B": {
+   "models": 9,
+   "repos": 9,
+   "sets": 7,
+   "work": 4478807682.0,
+   "unreadable": 1
+  },
+  "M5-10B": {
+   "models": 2,
+   "repos": 2,
+   "sets": 2,
+   "work": 651413517.0,
+   "unreadable": 0
+  }
+ },
+ "top_lineages": [
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.07915253396869283,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.7-FP8"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.07741805219599401,
+   "custom_work_share": 0.0,
+   "shape": "deepseek_v3|h7168|L61|E256|V129280",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-R1"
+  },
+  {
+   "size": 12,
+   "models": 12,
+   "work_share": 0.054284631422125654,
+   "custom_work_share": 0.03491419279992192,
+   "shape": "glm4_moe_lite|h2048|L47|E64|V154880",
+   "size_class": "MoE",
+   "custom": 11,
+   "example": "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.050616351128572504,
+   "custom_work_share": 0.0,
+   "shape": "kimi_k2|h7168|L61|E384|V163840",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "moonshotai/Kimi-K2-Thinking"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.03319106205695182,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.6-FP8"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.028232937336146038,
+   "custom_work_share": 0.0,
+   "shape": "mistral|h5120|L40|E0|V131072",
+   "size_class": "XL20-40B",
+   "custom": 0,
+   "example": "unsloth/Mistral-Small-24B-Instruct-2501"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.02206613063052691,
+   "custom_work_share": 0.042682536050962505,
+   "shape": "llama|h16384|L126|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 1,
+   "example": "NousResearch/Hermes-4-405B-FP8"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.02196488355667712,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.5"
+  },
+  {
+   "size": 15,
+   "models": 15,
+   "work_share": 0.018394006942212476,
+   "custom_work_share": 0.022608110470693055,
+   "shape": "qwen3|h5120|L40|E0|V151936",
+   "size_class": "L10-20B",
+   "custom": 14,
+   "example": "AnastasiaFantasy/affine-ana11-3-5CJXygeziPM2F8C1bhupwAKpKmx28cw1zD15Eoa5QbFPSXXE"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.017480452910371806,
+   "custom_work_share": 0.0,
+   "shape": "llama|h8192|L80|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.015546297035542108,
+   "custom_work_share": 0.0,
+   "shape": "qwen2_5_vl|h8192|L80|E0|V152064",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-VL-72B-Instruct"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.014426830747526367,
+   "custom_work_share": 0.0,
+   "shape": "qwen2|h8192|L80|E0|V152064",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-72B-Instruct"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.01317975313277585,
+   "custom_work_share": 0.025493608174976087,
+   "shape": "seed_oss|h5120|L64|E0|V155136",
+   "size_class": "XL20-40B",
+   "custom": 1,
+   "example": "NousResearch/Hermes-4.3-36B"
+  },
+  {
+   "size": 19,
+   "models": 19,
+   "work_share": 0.012902706463169968,
+   "custom_work_share": 0.024957716556221095,
+   "shape": "qwen3|h2560|L36|E0|V151936",
+   "size_class": "S<=5B",
+   "custom": 19,
+   "example": "AnastasiaFantasy/affine-ana7-8-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP"
+  },
+  {
+   "size": 4,
+   "models": 4,
+   "work_share": 0.012320522406415136,
+   "custom_work_share": 0.001162255497563686,
+   "shape": "qwen3_next|h2048|L48|E512|V151936",
+   "size_class": "MoE",
+   "custom": 3,
+   "example": "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.012035102925530651,
+   "custom_work_share": 0.023279510263813752,
+   "shape": "llama|h8192|L80|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 2,
+   "example": "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.01181993745394536,
+   "custom_work_share": 0.022863315501277705,
+   "shape": "deepseek_v3|h7168|L61|E384|V163840",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "talktik/Affine-Tik_5CS1HCeBhVVq4HRc7nBTLy5AbvjmwSz9iaEpKConvRB1Chn7"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.010706062119160037,
+   "custom_work_share": 0.0,
+   "shape": "qwen2|h5120|L64|E0|V152064",
+   "size_class": "XL20-40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-Coder-32B-Instruct"
+  },
+  {
+   "size": 16,
+   "models": 16,
+   "work_share": 0.010135517334057416,
+   "custom_work_share": 0.019605140169322507,
+   "shape": "qwen3|h5120|L64|E0|V151936",
+   "size_class": "XL20-40B",
+   "custom": 16,
+   "example": "AnastasiaFantasy/affine-ana7-7-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.009340844420312503,
+   "custom_work_share": 0.0,
+   "shape": "gpt_oss|h2880|L24|E32|V201088",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "openai/gpt-oss-20b"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.009100604724256802,
+   "custom_work_share": 0.0005189759000505331,
+   "shape": "qwen3_vl_moe_text|h4096|L94|E128|V151936",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "Nagata99999/Affine-2"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.008234530162530444,
+   "custom_work_share": 0.0,
+   "shape": "glm4v_moe_text|h4096|L46|E128|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.6V"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.007137634200271789,
+   "custom_work_share": 0.0,
+   "shape": "gemma3_text|h3840|L48|E0|V262208",
+   "size_class": "L10-20B",
+   "custom": 0,
+   "example": "unsloth/gemma-3-12b-it"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.007017773187448998,
+   "custom_work_share": 0.0001455282919831665,
+   "shape": "qwen3_5_moe_text|h4096|L60|E512|V248320",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.007016947136107339,
+   "custom_work_share": 4.011437404465314e-05,
+   "shape": "deepseek_v32|h7168|L61|E256|V129280",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "deepseek-ai/DeepSeek-V3.2-Speciale"
+  }
+ ],
+ "top_dup_sets": [
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.08239478588384612,
+   "custom_work_share": 0.006271490755310906,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "duckknowsAI/Affine-Duck-5FUNpXswwBPbYZfuJxEsgSdEx4bonLteeEzmBXapRxrPg4Kf"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.05208648707473879,
+   "custom_work_share": 0.0,
+   "shape": "deepseek_v3|h7168|L61|E256|V129280",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-V3"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.050616351128572504,
+   "custom_work_share": 0.0,
+   "shape": "kimi_k2|h7168|L61|E384|V163840",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "moonshotai/Kimi-K2-Thinking"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.03623459947785214,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe_lite|h2048|L47|E64|V154880",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.7-Flash"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.03319106205695182,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.6-FP8"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.028232937336146038,
+   "custom_work_share": 0.0,
+   "shape": "mistral|h5120|L40|E0|V131072",
+   "size_class": "XL20-40B",
+   "custom": 0,
+   "example": "unsloth/Mistral-Small-24B-Instruct-2501"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.02533156512125522,
+   "custom_work_share": 0.0,
+   "shape": "deepseek_v3|h7168|L61|E256|V129280",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-R1"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.02206613063052691,
+   "custom_work_share": 0.042682536050962505,
+   "shape": "llama|h16384|L126|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 1,
+   "example": "NousResearch/Hermes-4-405B-FP8"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.02196488355667712,
+   "custom_work_share": 0.0,
+   "shape": "glm4_moe|h5120|L92|E160|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.5"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.017480452910371806,
+   "custom_work_share": 0.0,
+   "shape": "llama|h8192|L80|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.015546297035542108,
+   "custom_work_share": 0.0,
+   "shape": "qwen2_5_vl|h8192|L80|E0|V152064",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-VL-72B-Instruct"
+  },
+  {
+   "size": 5,
+   "models": 5,
+   "work_share": 0.014751014639945416,
+   "custom_work_share": 0.0285329007019801,
+   "shape": "glm4_moe_lite|h2048|L47|E64|V154880",
+   "size_class": "MoE",
+   "custom": 5,
+   "example": "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.014426830747526367,
+   "custom_work_share": 0.0,
+   "shape": "qwen2|h8192|L80|E0|V152064",
+   "size_class": "XXL>40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-72B-Instruct"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.01317975313277585,
+   "custom_work_share": 0.025493608174976087,
+   "shape": "seed_oss|h5120|L64|E0|V155136",
+   "size_class": "XL20-40B",
+   "custom": 1,
+   "example": "NousResearch/Hermes-4.3-36B"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.012035102925530651,
+   "custom_work_share": 0.023279510263813752,
+   "shape": "llama|h8192|L80|E0|V128256",
+   "size_class": "XXL>40B",
+   "custom": 2,
+   "example": "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.01181993745394536,
+   "custom_work_share": 0.022863315501277705,
+   "shape": "deepseek_v3|h7168|L61|E384|V163840",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "talktik/Affine-Tik_5CS1HCeBhVVq4HRc7nBTLy5AbvjmwSz9iaEpKConvRB1Chn7"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.01175583631236014,
+   "custom_work_share": 6.99826849648235e-05,
+   "shape": "qwen3_next|h2048|L48|E512|V151936",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.010706062119160037,
+   "custom_work_share": 0.0,
+   "shape": "qwen2|h5120|L64|E0|V152064",
+   "size_class": "XL20-40B",
+   "custom": 0,
+   "example": "Qwen/Qwen2.5-Coder-32B-Instruct"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.009340844420312503,
+   "custom_work_share": 0.0,
+   "shape": "gpt_oss|h2880|L24|E32|V201088",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "openai/gpt-oss-20b"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.00883230318774695,
+   "custom_work_share": 0.0,
+   "shape": "qwen3_vl_moe_text|h4096|L94|E128|V151936",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "Qwen/Qwen3-VL-235B-A22B-Instruct"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.008234530162530444,
+   "custom_work_share": 0.0,
+   "shape": "glm4v_moe_text|h4096|L46|E128|V151552",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "zai-org/GLM-4.6V"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.007137634200271789,
+   "custom_work_share": 0.0,
+   "shape": "gemma3_text|h3840|L48|E0|V262208",
+   "size_class": "L10-20B",
+   "custom": 0,
+   "example": "unsloth/gemma-3-12b-it"
+  },
+  {
+   "size": 2,
+   "models": 2,
+   "work_share": 0.007017773187448998,
+   "custom_work_share": 0.0001455282919831665,
+   "shape": "qwen3_5_moe_text|h4096|L60|E512|V248320",
+   "size_class": "MoE",
+   "custom": 1,
+   "example": "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.00699620870067852,
+   "custom_work_share": 0.0,
+   "shape": "deepseek_v32|h7168|L61|E256|V129280",
+   "size_class": "MoE",
+   "custom": 0,
+   "example": "deepseek-ai/DeepSeek-V3.2-Speciale"
+  },
+  {
+   "size": 1,
+   "models": 1,
+   "work_share": 0.006706006061476465,
+   "custom_work_share": 0.0,
+   "shape": "qwen3|h5120|L40|E0|V151936",
+   "size_class": "L10-20B",
+   "custom": 0,
+   "example": "Qwen/Qwen3-14B"
+  }
+ ],
+ "dup_sets": [
+  [
+   "IsaacMiliband/affine-KING-5EAD8NUiwxdgPQsWDh16dZo7z769FCKwHprKfzTFcp7KoW9T",
+   "Miller777/Affine-5DSRCXKxeup14y8Yg86FkgQmmesKfimvwxTWABPN5piw4k4U",
+   "NickDegollado0714/Affine-7-5DAYLKjQJ2H17wxKLEj54EiuqEWRAdwkeYZ8GtswdcE65r4j",
+   "curli12/Affine-2m19d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "darksky8/affine-5ECUe6Ji965Vm5tsgswwHU7gA84KNLpvvDytzg2Amyg3Hbi1",
+   "tfc101728/affine-tfc07-5EPCjZEgM7UbihCnaGoyGJWWKQs7Ry3NRJCDLVgSc9kthgHE"
+  ],
+  [
+   "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ",
+   "catusesAI/Affine-e4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "catusesAI/Affine-eee4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "curli12/Affine-2m10-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "tomascooler/affine-eagle1130_1-5DiD6vzmtQ8Jy6V6AsMAdxnheXcvF7J9yf61EyMQhDvbjLGf"
+  ],
+  [
+   "curli12/Affine-2m6-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr",
+   "curli12/Affine-2m6d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj",
+   "curli12/Affine-2m6d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "vera6/affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g",
+   "void-818/Affine-star_v8-5Dy7KFivuHcFtLMM4PYnzkCgyAo7B3wRMft1CWur2jEzEmtQ"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana9-24-5H4QxkyKjxKAYW3QvJ7nmMZNEosPfJiJ6UoJ611wt9QoFH2Y",
+   "curli12/Affine-2m8d-5FUFEuZqiLU9GxpHTcojBBvr5gS6sqcnqBQr1sUxNgLhP7B4",
+   "curli12/Affine-2m8d-5Fj86zFNm38sf9U1cE2egU9tvvV1Rxt92ZZZfhwJoHhW8uib",
+   "curli12/Affine-2m8d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj"
+  ],
+  [
+   "halen214/affine-name-5DJGLU5917iojsdJ9VDHHpwU2eh1QEFhbN4sEEvAUdLbQuXC",
+   "ivichsoon/affine-5F1qnJUsasELL8DPSTFLngD4F9X2RAtZbezQy6G8rQkW6VyY",
+   "zai-org/GLM-5-FP8"
+  ],
+  [
+   "ATL-Machine/affine-A-2-5HTWAtx1sD8JH35WrPYMbUvGwvHyxRit8oAAuEcbeD2ed451",
+   "aiseosae/Affine-yellow-5Gc21jWvHzD9zZth9EgbiiS6u12F18sbL8SkbqEFTq9GLqpQ"
+  ],
+  [
+   "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9",
+   "Qwen/Qwen3-Coder-Next"
+  ],
+  [
+   "ATL-Machine/affine-test-213-5GEc6UzXjDCDxcE7cpB8yxW3g83gSNFVQYZJZRYMQXdkBU6Y",
+   "curli12/Affine-2m11d-5G6p2ogtftr3RHnNSLacHEmQ33zj7mAqjKi8Rp56wvCGZchK"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana11-3-5CJXygeziPM2F8C1bhupwAKpKmx28cw1zD15Eoa5QbFPSXXE",
+   "aminadev/Affine-q-5FPFMo7wichCnhgYb8RU2ezgF86QTRBk2eh3Y5P6cuwZEYJV"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana7-8-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP",
+   "naruto1208/affine-k-6-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana7-9-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP",
+   "naruto1208/affine-k-8-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM"
+  ],
+  [
+   "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7",
+   "NousResearch/Hermes-4-70B"
+  ],
+  [
+   "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe",
+   "Qwen/Qwen3.5-397B-A17B"
+  ],
+  [
+   "JRohner/affine-qwen3-480-5HSmJpVjxofnwa7EtuoGyic2aSWKYaCQf6qADLc7ytNdfJNU",
+   "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8"
+  ],
+  [
+   "Nagata99999/Affine-5CnxEmj5NAAZTVRquPvcK9Wr5GKjYtiJKYL5PYUAmdreKpH3",
+   "tfc101728/affine-tfch05-5FWwdSYqfN7AY3GTA5jSi9ta4h7m2cxGuAU1dtNG4EUMVTUK"
+  ],
+  [
+   "NickDegollado0714/Affine-5D7k23BiMdHLDhiBpN2x4CPcA7U1XvoieCvK6ffx4EZfPm8v",
+   "gold24k/affine-5EPRMSgcqMcJr5B2znUodfhY19goexfaNPcwZGR6i6d53H4E"
+  ],
+  [
+   "NickDegollado0714/Affine-5Gh2RhG3Ee9mGKa9xHccWcPbPT2wzz8zwJyHFyT6cqWQWtSi",
+   "Qwen/Qwen3-235B-A22B"
+  ],
+  [
+   "affine123456/Affine-No1-5DjpF2tsVQLsVe4b1ik5xiFSnc637eDy3A5it8PHnqzycQzQ",
+   "affine123456/Affine-No1-5Fej7vwRLjLEUqHvEU7h6QfkQbFXxsXjPh3CZMA7PfdVuXBZ"
+  ],
+  [
+   "aiseosae/Affine-G4-5EHNj2HZoRYKXtewrXPbvCTixTPdPGQJ6SkaZvrx3GeqEhsc",
+   "target919/affine-k-1-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj"
+  ],
+  [
+   "catusesAI/Affine-ed34-0201-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x",
+   "sm7rt/Affine-5FToCzSZbwfUPgcTvgvVZiJP192aAfxMAEguQKUNSj8G1esX"
+  ],
+  [
+   "curli12/Affine-2m8d-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr",
+   "curli12/Affine-2m8d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM"
+  ],
+  [
+   "duckknowsAI/Affine-Duck-5FUNpXswwBPbYZfuJxEsgSdEx4bonLteeEzmBXapRxrPg4Kf",
+   "zai-org/GLM-4.7-FP8"
+  ],
+  [
+   "halen214/affine-name-5Gk45dfWQXe983QMHHzWGFbtUpsrJwrmcSkVs8RytVVAuqao",
+   "ineso22/affine-arial-5HRT8TWPAPwzRjWmZvcAUeXB6EogDxNSTAt3zsWPgLayCNPj"
+  ],
+  [
+   "rhuanmatias/Affine-01-5EALnKDFv8qkqERMbTFoZWz2BBofuti1zRuvcRq1JCT81rdJ",
+   "rhuanmatias/Affine-02-5FnepakFDZgvaYNEDDBhqHeYHJZHtC7L8CFfN8Q8HnFRbjec"
+  ],
+  [
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDC",
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDCy4uT"
+  ]
+ ],
+ "dup_sets_strict": [
+  [
+   "IsaacMiliband/affine-KING-5EAD8NUiwxdgPQsWDh16dZo7z769FCKwHprKfzTFcp7KoW9T",
+   "Miller777/Affine-5DSRCXKxeup14y8Yg86FkgQmmesKfimvwxTWABPN5piw4k4U",
+   "NickDegollado0714/Affine-7-5DAYLKjQJ2H17wxKLEj54EiuqEWRAdwkeYZ8GtswdcE65r4j",
+   "curli12/Affine-2m19d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "darksky8/affine-5ECUe6Ji965Vm5tsgswwHU7gA84KNLpvvDytzg2Amyg3Hbi1",
+   "tfc101728/affine-tfc07-5EPCjZEgM7UbihCnaGoyGJWWKQs7Ry3NRJCDLVgSc9kthgHE"
+  ],
+  [
+   "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ",
+   "catusesAI/Affine-e4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "catusesAI/Affine-eee4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "curli12/Affine-2m10-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "tomascooler/affine-eagle1130_1-5DiD6vzmtQ8Jy6V6AsMAdxnheXcvF7J9yf61EyMQhDvbjLGf"
+  ],
+  [
+   "curli12/Affine-2m6-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr",
+   "curli12/Affine-2m6d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj",
+   "curli12/Affine-2m6d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "vera6/affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g",
+   "void-818/Affine-star_v8-5Dy7KFivuHcFtLMM4PYnzkCgyAo7B3wRMft1CWur2jEzEmtQ"
+  ],
+  [
+   "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9",
+   "Qwen/Qwen3-Coder-Next"
+  ],
+  [
+   "ATL-Machine/affine-test-213-5GEc6UzXjDCDxcE7cpB8yxW3g83gSNFVQYZJZRYMQXdkBU6Y",
+   "curli12/Affine-2m11d-5G6p2ogtftr3RHnNSLacHEmQ33zj7mAqjKi8Rp56wvCGZchK"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana11-3-5CJXygeziPM2F8C1bhupwAKpKmx28cw1zD15Eoa5QbFPSXXE",
+   "aminadev/Affine-q-5FPFMo7wichCnhgYb8RU2ezgF86QTRBk2eh3Y5P6cuwZEYJV"
+  ],
+  [
+   "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7",
+   "NousResearch/Hermes-4-70B"
+  ],
+  [
+   "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe",
+   "Qwen/Qwen3.5-397B-A17B"
+  ],
+  [
+   "JRohner/affine-qwen3-480-5HSmJpVjxofnwa7EtuoGyic2aSWKYaCQf6qADLc7ytNdfJNU",
+   "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8"
+  ],
+  [
+   "Nagata99999/Affine-5CnxEmj5NAAZTVRquPvcK9Wr5GKjYtiJKYL5PYUAmdreKpH3",
+   "tfc101728/affine-tfch05-5FWwdSYqfN7AY3GTA5jSi9ta4h7m2cxGuAU1dtNG4EUMVTUK"
+  ],
+  [
+   "NickDegollado0714/Affine-5D7k23BiMdHLDhiBpN2x4CPcA7U1XvoieCvK6ffx4EZfPm8v",
+   "gold24k/affine-5EPRMSgcqMcJr5B2znUodfhY19goexfaNPcwZGR6i6d53H4E"
+  ],
+  [
+   "NickDegollado0714/Affine-5Gh2RhG3Ee9mGKa9xHccWcPbPT2wzz8zwJyHFyT6cqWQWtSi",
+   "Qwen/Qwen3-235B-A22B"
+  ],
+  [
+   "affine123456/Affine-No1-5DjpF2tsVQLsVe4b1ik5xiFSnc637eDy3A5it8PHnqzycQzQ",
+   "affine123456/Affine-No1-5Fej7vwRLjLEUqHvEU7h6QfkQbFXxsXjPh3CZMA7PfdVuXBZ"
+  ],
+  [
+   "catusesAI/Affine-ed34-0201-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x",
+   "sm7rt/Affine-5FToCzSZbwfUPgcTvgvVZiJP192aAfxMAEguQKUNSj8G1esX"
+  ],
+  [
+   "duckknowsAI/Affine-Duck-5FUNpXswwBPbYZfuJxEsgSdEx4bonLteeEzmBXapRxrPg4Kf",
+   "zai-org/GLM-4.7-FP8"
+  ],
+  [
+   "rhuanmatias/Affine-01-5EALnKDFv8qkqERMbTFoZWz2BBofuti1zRuvcRq1JCT81rdJ",
+   "rhuanmatias/Affine-02-5FnepakFDZgvaYNEDDBhqHeYHJZHtC7L8CFfN8Q8HnFRbjec"
+  ],
+  [
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDC",
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDCy4uT"
+  ]
+ ],
+ "lineage_sets": [
+  [
+   "AnastasiaFantasy/affine-ana7-8-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP",
+   "Miller777/Affine-5FR1vrmGuiBd2i5onxhtVtTBBxXSyejFaszou11hWxBMWF9H",
+   "aipriya/Affine-000-5DjkhvmmVAT5k7QuZd7eY1mdUD6ws6cQ2Zmw7Qz8P1xEWzFS",
+   "curli12/Affine-2m6-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr",
+   "curli12/Affine-2m6d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj",
+   "curli12/Affine-2m6d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "datlab75/Affine-Angelina-5EZUMjcsN4AdSGwVhwiNpruEbHD3QiLbKhAHeionQqyrcvTQ",
+   "denys0x83/affine-5CDUswY2ZK2nXnkaWhBAWD47CQE3KvMm6AyKhJ1Txm5R5tdi",
+   "dogknowsAI/Affine-rat-5HirFwmY5XSXBst2YSTfPTMiTvNJDZqc5WvHQrPXtRYdVE7Z",
+   "mohantesting/Affine-come-5E7staNhMMEq6yzwx8F2hNPJ6SWvGvbvAv4RsXwQ3bNV65cQ",
+   "morningtea006/affine-dog-5CvvN4i1ywzVhmzZZJ76W3uGDPK1ny2tj2DBqGHr8FkAeLYB",
+   "naruto1208/affine-k-6-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM",
+   "rhuanmatias/Affine-01-5EALnKDFv8qkqERMbTFoZWz2BBofuti1zRuvcRq1JCT81rdJ",
+   "rhuanmatias/Affine-02-5FnepakFDZgvaYNEDDBhqHeYHJZHtC7L8CFfN8Q8HnFRbjec",
+   "rootti/affine-OoO-5Fny8sb4wYJe7877VoMskA6rtDddXfqpGSZDDvtwhxjGg8Pn",
+   "vera6/affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g",
+   "void-818/Affine-luca_v11-5CtFSMCbvHryns4E7YrACNDyFYAcxGU9SkokGPHiJuvPNUci",
+   "void-818/Affine-star_v8-5Dy7KFivuHcFtLMM4PYnzkCgyAo7B3wRMft1CWur2jEzEmtQ",
+   "void-818/Affine-top4_v4-5F2JV4RvwPyAPe9axBri86v18DY35gdKpVQQg7K1bNCCDbDY"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana7-7-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP",
+   "IsaacMiliband/affine-KING-5CiHhhphLJzRjkrDWt9Gp8cFy7TSwpZTZa3Uejq5i3gkvszq",
+   "IsaacMiliband/affine-KING-5EAD8NUiwxdgPQsWDh16dZo7z769FCKwHprKfzTFcp7KoW9T",
+   "IsaacMiliband/affine-KING-5EJ65YZpbxihyyTXzdysZuc2wnzDazMyNACwJBK9q4pDDFr2",
+   "Miller777/Affine-5DSRCXKxeup14y8Yg86FkgQmmesKfimvwxTWABPN5piw4k4U",
+   "Miller777/Affine-5FX7H4hKenNv9BjmNv23467wSMWez9RASUGKwnmaMtr1ZuFs",
+   "Nagata99999/Affine-5CnxEmj5NAAZTVRquPvcK9Wr5GKjYtiJKYL5PYUAmdreKpH3",
+   "NickDegollado0714/Affine-7-5DAYLKjQJ2H17wxKLEj54EiuqEWRAdwkeYZ8GtswdcE65r4j",
+   "boweizh1204/affine-5FpoYFUqSisMMXCde1swhZWjd28RJaWQXZkFxep5qLwXy7eW",
+   "curli12/Affine-2m19d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "darksky8/affine-5ECUe6Ji965Vm5tsgswwHU7gA84KNLpvvDytzg2Amyg3Hbi1",
+   "halen214/affine-name-5C8BFsefAdHVS1ZhbxpWRkNR3PYTHC64AvhqyQT8AcArVUtM",
+   "tfc101728/affine-tfc07-5EPCjZEgM7UbihCnaGoyGJWWKQs7Ry3NRJCDLVgSc9kthgHE",
+   "tfc101728/affine-tfch05-5FWwdSYqfN7AY3GTA5jSi9ta4h7m2cxGuAU1dtNG4EUMVTUK",
+   "tfc101728/affine-tfch06-5Grvpqx9GxFCRR94ZPvGmcSyzAoCV6wmpb4duiLd3HFrykVe",
+   "tomascooler/affine-wh0-5FzxcV9qRtCuZRic8PyD3Zv7JSzbzqDeRa3yB5d94bahmPuZ"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana11-3-5CJXygeziPM2F8C1bhupwAKpKmx28cw1zD15Eoa5QbFPSXXE",
+   "AnastasiaFantasy/affine-ana7-9-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP",
+   "AnastasiaFantasy/affine-ana8-7-5GzsAUEJvVczanWgrMk93u4P666i5gWejADSrLhu7GcUio2z",
+   "Qwen/Qwen3-14B",
+   "aminadev/Affine-q-5FPFMo7wichCnhgYb8RU2ezgF86QTRBk2eh3Y5P6cuwZEYJV",
+   "curli12/Affine-2m8d-5G6p2ogtftr3RHnNSLacHEmQ33zj7mAqjKi8Rp56wvCGZchK",
+   "daminzombie/affine-zombie-5DAmXPwFADBsUcLthTXnKEpEmeue1x88v9geuHFUND4h5q7M",
+   "final-round/Affine-Disc_5G3Vc84iut46a99YRZrQoa9kmHnEpCzJoVVzVxWayrR5dbEE",
+   "micleowen02/affine-POI-5GxB9VQUBKGjGwz8rcqtsQi6kBNtr6WpQfBgEvDru2m3Xbd2",
+   "naruto1208/affine-g-3-5GGfD8FvqVmewdaYiDBVgYWPsxX8yupkt715gWRBfNpJ3T6Q",
+   "naruto1208/affine-k-8-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM",
+   "target919/affine-d-test-2-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj",
+   "target919/affine-f-test-1-5DV5SWR7BXRfQTRRTGsBhEu7aJVXKb1TF7kYfG9o1L3jNi9i",
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDC",
+   "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDCy4uT"
+  ],
+  [
+   "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ",
+   "catusesAI/Affine-0208-e4-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x",
+   "catusesAI/Affine-e4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "catusesAI/Affine-eee4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi",
+   "curli12/Affine-2m10-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "ineso22/affine-full-5CfYQwQPYyS4LXpfu3YSpiDhvQrZJB3rCT98mA2ZtxcS4t62",
+   "naruto1208/affine-k-7-5GVwnx568cWuGXh2BuYntjvD9xKFyJQPnNW1XbMdnGi2KHuW",
+   "naruto1208/affine-k-9-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj",
+   "rhuanmatias/Affine-03-5DtfHKxiDwrfHN4KvzX7UKgVJHQFRHwHvm3hYT9NMg5MA68z",
+   "tfc101728/affine-tfch02-5H3UnJwB4V5rURJX3Gx6NZUhEMQM2A13kBaNmUvhUguSpAJg",
+   "tomascooler/affine-eagle1130_1-5DiD6vzmtQ8Jy6V6AsMAdxnheXcvF7J9yf61EyMQhDvbjLGf",
+   "zai-org/GLM-4.7-Flash"
+  ],
+  [
+   "ATL-Machine/affine-A-1-5GEc6UzXjDCDxcE7cpB8yxW3g83gSNFVQYZJZRYMQXdkBU6Y",
+   "ATL-Machine/affine-A-2-5HTWAtx1sD8JH35WrPYMbUvGwvHyxRit8oAAuEcbeD2ed451",
+   "aiseosae/Affine-yellow-5Gc21jWvHzD9zZth9EgbiiS6u12F18sbL8SkbqEFTq9GLqpQ",
+   "curli12/Affine-2m6d-5Fj86zFNm38sf9U1cE2egU9tvvV1Rxt92ZZZfhwJoHhW8uib",
+   "micleowen02/affine-crash-5CVLTzAwVNuFE6dsio9GDaZbVSGR67uHsk3BUEWCWPX7HLXH",
+   "morningtea006/affine-horse-5Hg1K2prUdnvSnG7m3mZBmF9hyo8zu8Z4miJSYsfe9Hpvgcu",
+   "naruto1208/affine-g-9-5HjoacLLDyStHdtvDUCRZi6jSuSZKDQY3KoSAvKB99bgr29G",
+   "sharon9018/Affine-update-32-5DV5SWR7BXRfQTRRTGsBhEu7aJVXKb1TF7kYfG9o1L3jNi9i"
+  ],
+  [
+   "AnastasiaFantasy/affine-ana9-24-5H4QxkyKjxKAYW3QvJ7nmMZNEosPfJiJ6UoJ611wt9QoFH2Y",
+   "curli12/Affine-2m8d-5FUFEuZqiLU9GxpHTcojBBvr5gS6sqcnqBQr1sUxNgLhP7B4",
+   "curli12/Affine-2m8d-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr",
+   "curli12/Affine-2m8d-5Fj86zFNm38sf9U1cE2egU9tvvV1Rxt92ZZZfhwJoHhW8uib",
+   "curli12/Affine-2m8d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj",
+   "curli12/Affine-2m8d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM",
+   "glowsenior/affine-senior-5GZQjTBnzFnNnKNbVry2hS29CzNa4EkovYAAsdvg3cDA7ssN",
+   "godninja/Affine-king_v1-5CkSCRSNNMrVy8bwAfuDWqLqNYAEc3shDJZUtQ4Rjboi2zFT"
+  ],
+  [
+   "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9",
+   "Qwen/Qwen3-Coder-Next",
+   "halen214/affine-name-5Gk45dfWQXe983QMHHzWGFbtUpsrJwrmcSkVs8RytVVAuqao",
+   "ineso22/affine-arial-5HRT8TWPAPwzRjWmZvcAUeXB6EogDxNSTAt3zsWPgLayCNPj"
+  ],
+  [
+   "miromind-ai/MiroThinker-v1.5-235B",
+   "rootti/affine-dvd-5Fny8sb4wYJe7877VoMskA6rtDddXfqpGSZDDvtwhxjGg8Pn",
+   "vera6/affine-multi",
+   "void-818/Affine-top_v7-5FjJx2CnphgXsTKcA3igqfNBVH9WaokDGgrP1rcKA2aWgWSx"
+  ],
+  [
+   "Petro-B/affine-1201",
+   "datlab75/Affine-HaruUrara-5EZUMjcsN4AdSGwVhwiNpruEbHD3QiLbKhAHeionQqyrcvTQ",
+   "ineso22/affine-counter-5CfYQwQPYyS4LXpfu3YSpiDhvQrZJB3rCT98mA2ZtxcS4t62"
+  ],
+  [
+   "halen214/affine-name-5DJGLU5917iojsdJ9VDHHpwU2eh1QEFhbN4sEEvAUdLbQuXC",
+   "ivichsoon/affine-5F1qnJUsasELL8DPSTFLngD4F9X2RAtZbezQy6G8rQkW6VyY",
+   "zai-org/GLM-5-FP8"
+  ],
+  [
+   "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7",
+   "NousResearch/Hermes-4-70B"
+  ],
+  [
+   "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe",
+   "Qwen/Qwen3.5-397B-A17B"
+  ],
+  [
+   "JRohner/affine-qwen3-480-5HSmJpVjxofnwa7EtuoGyic2aSWKYaCQf6qADLc7ytNdfJNU",
+   "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8"
+  ],
+  [
+   "Nagata99999/Affine-2",
+   "Qwen/Qwen3-VL-235B-A22B-Instruct"
+  ],
+  [
+   "NickDegollado0714/Affine-5D7k23BiMdHLDhiBpN2x4CPcA7U1XvoieCvK6ffx4EZfPm8v",
+   "gold24k/affine-5EPRMSgcqMcJr5B2znUodfhY19goexfaNPcwZGR6i6d53H4E"
+  ],
+  [
+   "NickDegollado0714/Affine-5Gh2RhG3Ee9mGKa9xHccWcPbPT2wzz8zwJyHFyT6cqWQWtSi",
+   "Qwen/Qwen3-235B-A22B"
+  ],
+  [
+   "affine123456/Affine-No1-5DjpF2tsVQLsVe4b1ik5xiFSnc637eDy3A5it8PHnqzycQzQ",
+   "affine123456/Affine-No1-5Fej7vwRLjLEUqHvEU7h6QfkQbFXxsXjPh3CZMA7PfdVuXBZ"
+  ],
+  [
+   "aiseosae/Affine-G4-5EHNj2HZoRYKXtewrXPbvCTixTPdPGQJ6SkaZvrx3GeqEhsc",
+   "target919/affine-k-1-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj"
+  ],
+  [
+   "catusesAI/Affine-ed34-0201-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x",
+   "sm7rt/Affine-5FToCzSZbwfUPgcTvgvVZiJP192aAfxMAEguQKUNSj8G1esX"
+  ],
+  [
+   "deepseek-ai/DeepSeek-R1",
+   "deepseek-ai/DeepSeek-V3"
+  ],
+  [
+   "deepseek-ai/DeepSeek-V3.2-Speciale",
+   "weirek/Affine-0213-5F7YrqLcPBeoWeNu4ZzAy8xvnPSwfR135J7bYMSVpfkUHpqF"
+  ],
+  [
+   "ineso22/affine-spike-5EkAmx18DbosJzUAmMqm7cVsXcpiJEC8Avv7nehAJ5V2CNSe",
+   "silentfly/Affine-qwen0203-5FgjroARbfhQjRDSgqrBwPziLANQ6dGgs3cJqdrdnwgy94Z7"
+  ]
+ ],
+ "repo_cids": {
+  "tomascooler/affine-eagle1130_1-5DiD6vzmtQ8Jy6V6AsMAdxnheXcvF7J9yf61EyMQhDvbjLGf": [
+   "0022133c-025c-5d34-bc2d-8b71113fd578"
+  ],
+  "aiseosae/Affine-G4-5EHNj2HZoRYKXtewrXPbvCTixTPdPGQJ6SkaZvrx3GeqEhsc": [
+   "00bb0fc6-e7f0-5ff4-9606-3eaf11308899"
+  ],
+  "NousResearch/Hermes-4-14B": [
+   "0591bb2d-4282-5c83-8b03-3c089b5f0a39"
+  ],
+  "Nagata99999/Affine-5CnxEmj5NAAZTVRquPvcK9Wr5GKjYtiJKYL5PYUAmdreKpH3": [
+   "07fa5a78-dd34-553b-9011-ff8a6e7fe238"
+  ],
+  "NousResearch/DeepHermes-3-Mistral-24B-Preview": [
+   "07fc32f5-a63d-57e4-a86d-c167570b53e1"
+  ],
+  "Miller777/Affine-5FR1vrmGuiBd2i5onxhtVtTBBxXSyejFaszou11hWxBMWF9H": [
+   "0902d3b8-a4b6-51f3-8efa-d168ce1f11c9"
+  ],
+  "danielrodriguez000/affine-moe-5GNi9WnuGCnrpssb1BT5VgzseXSdijWwgS9MZ7PHGTr3TBDS": [
+   "0c7bb4c1-fac4-571d-822f-b63e2e1ce9e1"
+  ],
+  "ATL-Machine/affine-test-213-5GEc6UzXjDCDxcE7cpB8yxW3g83gSNFVQYZJZRYMQXdkBU6Y": [
+   "0d0a3756-58e6-544f-8c74-ea60b3069426"
+  ],
+  "Qwen/Qwen3Guard-Gen-0.6B": [
+   "0d5ce0e6-5d96-5931-9ca2-3f6d9edcb37c"
+  ],
+  "curli12/Affine-2m8d-5G6p2ogtftr3RHnNSLacHEmQ33zj7mAqjKi8Rp56wvCGZchK": [
+   "0d85aa50-cd36-5aaa-8928-95f2214ab7ea"
+  ],
+  "curli12/Affine-2m6d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM": [
+   "0f3df4b0-4906-555a-98f2-f9c3330a8cad"
+  ],
+  "datlab75/Affine-Angelina-5EZUMjcsN4AdSGwVhwiNpruEbHD3QiLbKhAHeionQqyrcvTQ": [
+   "102710d7-154a-5e9f-ac7f-38f01ac54a62"
+  ],
+  "target919/affine-d-test-2-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj": [
+   "11d5877a-9e0e-5afa-8d20-3799f857da47"
+  ],
+  "micleowen02/affine-crash-5CVLTzAwVNuFE6dsio9GDaZbVSGR67uHsk3BUEWCWPX7HLXH": [
+   "125a9004-9154-51c4-b009-a2a4ddf98ad1"
+  ],
+  "rootti/affine-dvd-5Fny8sb4wYJe7877VoMskA6rtDddXfqpGSZDDvtwhxjGg8Pn": [
+   "18929c9f-c36c-506c-a28f-e0a332c2e0ab"
+  ],
+  "moonshotai/Kimi-K2-Instruct-0905": [
+   "1a0d9245-582a-5cde-8f5b-2da5b9542339"
+  ],
+  "aipriya/Affine-000-5DjkhvmmVAT5k7QuZd7eY1mdUD6ws6cQ2Zmw7Qz8P1xEWzFS": [
+   "1a9bf52c-fe29-5555-a03c-c6fb557cb330"
+  ],
+  "zai-org/GLM-4.6-FP8": [
+   "1aec6931-3bb8-5f5e-a61c-b112276ed140"
+  ],
+  "unsloth/Llama-3.2-3B-Instruct": [
+   "20acffc0-0c5f-58e3-97af-21fc0b261ec4"
+  ],
+  "daminzombie/affine-zombie-5DAmXPwFADBsUcLthTXnKEpEmeue1x88v9geuHFUND4h5q7M": [
+   "2159c8ee-45df-5747-9876-54e2aa8423f6"
+  ],
+  "NickDegollado0714/Affine-5D7k23BiMdHLDhiBpN2x4CPcA7U1XvoieCvK6ffx4EZfPm8v": [
+   "21f3f50d-8d03-5deb-a4ed-29384ec1901d"
+  ],
+  "NickDegollado0714/Affine-7-5DAYLKjQJ2H17wxKLEj54EiuqEWRAdwkeYZ8GtswdcE65r4j": [
+   "235a9e48-a3b5-5700-a40d-5fb1e2c4a9b5"
+  ],
+  "micleowen02/affine-POI-5GxB9VQUBKGjGwz8rcqtsQi6kBNtr6WpQfBgEvDru2m3Xbd2": [
+   "24ffa1b0-15af-5f30-9fb9-6825b3e88054"
+  ],
+  "naruto1208/affine-k-6-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM": [
+   "2683107c-1ea9-52e4-ace8-57243ccb8664"
+  ],
+  "void-818/Affine-top_v7-5FjJx2CnphgXsTKcA3igqfNBVH9WaokDGgrP1rcKA2aWgWSx": [
+   "29c2ca39-0e5f-51fb-99cf-037f0255d3ed"
+  ],
+  "Qwen/Qwen2.5-Coder-32B-Instruct": [
+   "2cdc73dd-eec4-5e6b-883a-7736bbe12fd8"
+  ],
+  "curli12/Affine-2m8d-5FUFEuZqiLU9GxpHTcojBBvr5gS6sqcnqBQr1sUxNgLhP7B4": [
+   "2ed06cfa-778b-5ccf-a426-1132efd8d597"
+  ],
+  "curli12/Affine-2m8d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj": [
+   "30b7c6e5-4e7e-5bb3-94d0-25d13b0b5fec"
+  ],
+  "curli12/Affine-2m11d-5FUFEuZqiLU9GxpHTcojBBvr5gS6sqcnqBQr1sUxNgLhP7B4": [
+   "312f5407-9a03-50fa-a6c4-d530df0f477d"
+  ],
+  "AnastasiaFantasy/affine-ana12-4-5FbaSKuvs8Pna1Az42yFgMgfaXW58woWBrQLjAPbMAKpidJz": [
+   "3241af27-3c10-5b72-b7c5-d9efb45d6692"
+  ],
+  "catusesAI/Affine-eee4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi": [
+   "33742713-c58f-5bfd-be3f-30a39e490fc4"
+  ],
+  "NousResearch/Hermes-4-70B": [
+   "344f4802-b7af-569c-9f82-3a15f1f142aa"
+  ],
+  "ineso22/affine-counter-5CfYQwQPYyS4LXpfu3YSpiDhvQrZJB3rCT98mA2ZtxcS4t62": [
+   "34a20b32-7cf0-5fca-83f1-6679f7c83972"
+  ],
+  "tfc101728/affine-tfch05-5FWwdSYqfN7AY3GTA5jSi9ta4h7m2cxGuAU1dtNG4EUMVTUK": [
+   "38cf8cb9-2377-56f9-b531-7f3655f4fe52"
+  ],
+  "deepseek-ai/DeepSeek-V3.2-Speciale": [
+   "39d75699-957f-571f-8737-f2c72819d3e8"
+  ],
+  "rednote-hilab/dots.ocr": [
+   "3d1b30a8-d5be-5ce5-99c7-4fc1ddc9becb"
+  ],
+  "eugene90909/affine-5EkWGutMVxd7UHZtDzzi1S4eXTrii18Jb9gjz51CUuRYfYWA": [
+   "3d201d24-9a54-5682-8455-31e064c21abb"
+  ],
+  "AnastasiaFantasy/affine-ana8-7-5GzsAUEJvVczanWgrMk93u4P666i5gWejADSrLhu7GcUio2z": [
+   "3d3bfd20-1834-5497-b149-1378713e5319"
+  ],
+  "Bluespiral0225/Affine-0211-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7": [
+   "3dcab62c-db6b-556c-8006-6a1e85d6c06e"
+  ],
+  "dogknowsAI/Affine-rat-5HirFwmY5XSXBst2YSTfPTMiTvNJDZqc5WvHQrPXtRYdVE7Z": [
+   "4069a246-76da-57c1-b0e5-0114cb2ed985"
+  ],
+  "morningtea006/affine-bear-5CSdJMrN4jbZiC46NHLfUo9tqZadGRgHpsT8PvfKWFn4ZwY6": [
+   "40ae0547-ee45-5d99-a715-984af0840a25"
+  ],
+  "Qwen/Qwen2.5-VL-32B-Instruct": [
+   "41d0bdad-9127-5d30-8d9f-e743577f4293"
+  ],
+  "curli12/Affine-2m19d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM": [
+   "42b5de00-67c5-5bc3-b12a-9375bf22f262"
+  ],
+  "tfc101728/affine-tfch06-5Grvpqx9GxFCRR94ZPvGmcSyzAoCV6wmpb4duiLd3HFrykVe": [
+   "4349deb5-5100-550b-a3c0-06807f3efed2"
+  ],
+  "curli12/Affine-2m8d-5Fj86zFNm38sf9U1cE2egU9tvvV1Rxt92ZZZfhwJoHhW8uib": [
+   "44b8ce07-198c-5790-984c-5a9ea7041ea3"
+  ],
+  "glowsenior/affine-senior-5GZQjTBnzFnNnKNbVry2hS29CzNa4EkovYAAsdvg3cDA7ssN": [
+   "45b2c4d4-bae2-5df4-a2a2-4792cf6637cb"
+  ],
+  "Qwen/Qwen3-235B-A22B": [
+   "46533f4b-b572-52e6-8a84-1615fcdcd12c"
+  ],
+  "naruto1208/affine-g-3-5GGfD8FvqVmewdaYiDBVgYWPsxX8yupkt715gWRBfNpJ3T6Q": [
+   "47ca7e63-5044-58b9-b609-ef1b6227ae40"
+  ],
+  "affine123456/Affine-No1-5DjpF2tsVQLsVe4b1ik5xiFSnc637eDy3A5it8PHnqzycQzQ": [
+   "48a54a4c-3471-58ec-8466-260c7217b145"
+  ],
+  "samoline/6a0b06b3-cf8d-46cb-9b37-8d4366820931": [
+   "4b9727c1-2c2f-512c-8dbe-4594dab7c90e"
+  ],
+  "unsloth/gemma-3-4b-it": [
+   "4d636d79-623c-5688-b57c-264f9e53d85d"
+  ],
+  "curli12/Affine-test-5CoTcjHRrQDfe6TzTtz5uY724n7YdAhJxivFWPAbwA2mtG3w": [
+   "4d8604f7-c606-5f31-a0c5-a68a92cd8281"
+  ],
+  "halen214/affine-name-5E54pmfGQtYGVgArsEH6jDku8E9byLuRcMF61k5j37mXw9Ba": [
+   "4e0d879b-8b0d-5c0a-9d75-4dbfaaf86786"
+  ],
+  "Qwen/Qwen3.5-397B-A17B": [
+   "51a4284a-a5a0-5e44-a9cc-6af5a2abfbcf"
+  ],
+  "darksky8/affine-5ECUe6Ji965Vm5tsgswwHU7gA84KNLpvvDytzg2Amyg3Hbi1": [
+   "51b287fd-7fd6-5263-8e50-e141288d9db6"
+  ],
+  "talktik/Affine-Tik_5CS1HCeBhVVq4HRc7nBTLy5AbvjmwSz9iaEpKConvRB1Chn7": [
+   "51c86bd2-eed8-5db2-8a78-f87c2296aaf5"
+  ],
+  "openai/gpt-oss-20b": [
+   "52bebe99-e55f-5bee-a386-b293b6e762c5"
+  ],
+  "zai-org/GLM-4.7-FP8": [
+   "572bd930-0438-520c-a4a4-56874be296f8"
+  ],
+  "curli12/Affine-2m6d-5Fj86zFNm38sf9U1cE2egU9tvvV1Rxt92ZZZfhwJoHhW8uib": [
+   "5832858a-486d-5dcd-a6b2-5aed3e960d33"
+  ],
+  "rootti/affine-OoO-5Fny8sb4wYJe7877VoMskA6rtDddXfqpGSZDDvtwhxjGg8Pn": [
+   "5887dd7f-a56b-5241-816a-d9825055285e"
+  ],
+  "curli12/Affine-2m6-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr": [
+   "59b028df-c886-543a-b14e-9e062f7ad136"
+  ],
+  "jmoons435/affine-1": [
+   "5ad5a421-93df-5022-9511-c8d0f61600c2"
+  ],
+  "hex7777/Affine-titan4-5DvjPcGKnGgxBxgVEP78wxGm3YQzdQgPCZVMwsrwHCq4DMDE": [
+   "5c957bda-03f1-52f2-9b58-eaa0e45ed2fa"
+  ],
+  "curli12/Affine-2m6d-5G6fnmVT2snVzopBuNKBCvR398b6QoFkqSVAzjgN7cPBDHKj": [
+   "5fc87d07-5190-5dae-93c8-e1abe668dc5a"
+  ],
+  "Qwen/Qwen2.5-VL-72B-Instruct": [
+   "62b7ae7e-e1f5-52c3-a47f-fa4eb4bf618b"
+  ],
+  "Qwen/Qwen2.5-72B-Instruct": [
+   "62cc0462-8983-5ef1-8859-92ccf726e235"
+  ],
+  "tfc101728/affine-tfch02-5H3UnJwB4V5rURJX3Gx6NZUhEMQM2A13kBaNmUvhUguSpAJg": [
+   "62f1f79b-36e5-5df9-b3be-32535baac100"
+  ],
+  "Qwen/Qwen3-Coder-Next": [
+   "6320ab82-9e94-5d63-8e38-d136f61dc157"
+  ],
+  "mohantesting/Affine-come-5E7staNhMMEq6yzwx8F2hNPJ6SWvGvbvAv4RsXwQ3bNV65cQ": [
+   "638e744c-ff35-5b7d-899c-11e4c159bb98"
+  ],
+  "zai-org/GLM-5-FP8": [
+   "655b31a5-7687-56e3-ba3f-64738b89ae56"
+  ],
+  "Miller777/Affine-5FX7H4hKenNv9BjmNv23467wSMWez9RASUGKwnmaMtr1ZuFs": [
+   "65b0e7ec-944b-5a54-9fcc-9f3021af8cbc"
+  ],
+  "morningtea006/affine-dog-5CvvN4i1ywzVhmzZZJ76W3uGDPK1ny2tj2DBqGHr8FkAeLYB": [
+   "68bff470-b78a-571e-bf8a-d7e16e06dff6"
+  ],
+  "rhuanmatias/Affine-01-5EALnKDFv8qkqERMbTFoZWz2BBofuti1zRuvcRq1JCT81rdJ": [
+   "696c6c0b-0724-5920-ba76-a202af626394"
+  ],
+  "miromind-ai/MiroThinker-v1.5-235B": [
+   "698c5cdb-c1f0-5fd4-a7be-dd3eb68c63f5"
+  ],
+  "tfc101728/affine-tbtf3-5G1PWLg8P8PEJtyvBKhqqudHMFbWyohxiB6QjLdX72UyQaty": [
+   "6bca1360-e9aa-502d-9caa-18e0a3714499"
+  ],
+  "naruto1208/affine-k-2-5FTwNufvecuCNbq9u7gHDhegpBbff9p1a62UeX15mwUyhwyG": [
+   "6be550a0-81f8-5c44-a734-067fc8078353"
+  ],
+  "Bluespiral0225/Affine-0212-5CMdwDbmS4nbumHnHZkGGHHmiNHcCycjfJGagaGRrGPKfoS7": [
+   "6d791c8c-13e0-5716-95b5-309397ed60e7"
+  ],
+  "moonshotai/Kimi-K2-Thinking": [
+   "6ef49e82-40da-5bca-a326-be97fd1e997e"
+  ],
+  "Qwen/Qwen3-VL-235B-A22B-Instruct": [
+   "6f0c08f6-5c08-54df-80af-3a3c0d671cbd"
+  ],
+  "zai-org/GLM-4.7-Flash": [
+   "6f155cd6-0ae7-5d3e-abf0-eb365c935f26"
+  ],
+  "Cheeeeeeeeky/affine-frogmaxx-5Ec26gNVCcavNTHrpsrKsdzBTM5QE1cvYhcWtaLriepqAeoJ": [
+   "72b76b8b-983d-5653-8a4c-4c170341cf09"
+  ],
+  "AnastasiaFantasy/affine-ana7-9-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP": [
+   "738b1cd1-3f22-5d63-a9e3-e3288a3fdaa8"
+  ],
+  "curli12/Affine-2m10-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM": [
+   "77deae13-c97b-5c13-b8c7-be12cac1fe50"
+  ],
+  "Nagata99999/Affine-2": [
+   "7870ba4a-801c-5419-a329-95ef0cfc2cb7"
+  ],
+  "catusesAI/Affine-0208-e4-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x": [
+   "7a4299c0-4f3c-5398-8dc6-07b3d8ecbd63"
+  ],
+  "AnastasiaFantasy/affine-ana9-24-5H4QxkyKjxKAYW3QvJ7nmMZNEosPfJiJ6UoJ611wt9QoFH2Y": [
+   "7a63ea48-8648-52ec-8c47-5093a47efd04"
+  ],
+  "IsaacMiliband/affine-KING-5CiHhhphLJzRjkrDWt9Gp8cFy7TSwpZTZa3Uejq5i3gkvszq": [
+   "7b0523e3-4606-58cb-aa1b-50828a5f522a"
+  ],
+  "zai-org/GLM-4.5": [
+   "7b35e45f-da9e-5692-b1a2-8586445fef60"
+  ],
+  "tfc101728/affine-tfc-h01-5HMfSYVz9bFAsHbfSBR41wpCXkqPPSAkZVVQr2SNWEfD6u88": [
+   "7b546c7d-8447-5c87-9fc5-ee41facb44c9"
+  ],
+  "target919/affine-k-1-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj": [
+   "7ea7a3da-992c-53de-aabc-18f0b0803029"
+  ],
+  "zai-org/GLM-4.5-Air": [
+   "7fa03c12-823f-529a-8245-36432f03e9a1"
+  ],
+  "Miller777/Affine-5DSRCXKxeup14y8Yg86FkgQmmesKfimvwxTWABPN5piw4k4U": [
+   "805a2546-bde2-54d2-9fa0-d0158bba94ea"
+  ],
+  "unsloth/gemma-3-12b-it": [
+   "83594561-0940-5839-ac92-1d94dd280567"
+  ],
+  "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8": [
+   "83ce50c4-6d3f-55a6-88a6-c5db187f2c70"
+  ],
+  "NousResearch/Hermes-4.3-36B": [
+   "845acc36-a7fb-591e-990f-f7f66c2491b1"
+  ],
+  "naruto1208/affine-k-7-5GVwnx568cWuGXh2BuYntjvD9xKFyJQPnNW1XbMdnGi2KHuW": [
+   "85d73829-d952-5444-b574-29aa1be33702"
+  ],
+  "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16": [
+   "8853ebad-8cb6-55fc-ba55-ca147c36c84b"
+  ],
+  "ineso22/affine-arial-5HRT8TWPAPwzRjWmZvcAUeXB6EogDxNSTAt3zsWPgLayCNPj": [
+   "8ea98925-6a69-54ab-a950-6e82c29796fb"
+  ],
+  "zai-org/GLM-4.6V": [
+   "8f2105c5-b200-5aa5-969f-0720f7690f3c"
+  ],
+  "rhuanmatias/Affine-02-5FnepakFDZgvaYNEDDBhqHeYHJZHtC7L8CFfN8Q8HnFRbjec": [
+   "8f8c54b5-fc43-5d67-81a4-efee14bf6fd9"
+  ],
+  "naruto1208/affine-k-8-5CZjHF64MTZXVJFoQYjicUd6eVNbJ9swSdpy1uhDLFysCjmM": [
+   "91e31f51-483a-5aba-9dc4-9a9651838f0d"
+  ],
+  "gold24k/affine-5EPRMSgcqMcJr5B2znUodfhY19goexfaNPcwZGR6i6d53H4E": [
+   "92310195-b288-52a4-a191-13f0793bedbe"
+  ],
+  "curli12/Affine-2m8d-5HYfV2KsMB7cVka3cdHzHZ5x1vMcS8SUrFTDaTsD8QknWHGM": [
+   "96741335-b06d-57e0-9b13-dd963cab540a"
+  ],
+  "Qwen/Qwen3-30B-A3B": [
+   "96b5aab1-6a45-578b-8897-6f927b3aa87f"
+  ],
+  "tfc101728/affine-tfc07-5EPCjZEgM7UbihCnaGoyGJWWKQs7Ry3NRJCDLVgSc9kthgHE": [
+   "97b9742d-491b-5dc2-b027-68943ec427a8"
+  ],
+  "unsloth/Mistral-Small-24B-Instruct-2501": [
+   "986b874c-bf41-549f-b28f-4322f86fa4ba"
+  ],
+  "naruto1208/affine-g-9-5HjoacLLDyStHdtvDUCRZi6jSuSZKDQY3KoSAvKB99bgr29G": [
+   "9a30e677-ae6c-56a4-bf77-b100bd59212d"
+  ],
+  "ineso22/affine-dylm-5EkAmx18DbosJzUAmMqm7cVsXcpiJEC8Avv7nehAJ5V2CNSe": [
+   "9b227eb9-f7ea-5d64-b11e-b964b6a336f2"
+  ],
+  "ATL-Machine/affine-test-214-5HTWAtx1sD8JH35WrPYMbUvGwvHyxRit8oAAuEcbeD2ed451": [
+   "9f397b14-4b40-51f7-bb44-90810eebcec6"
+  ],
+  "ineso22/affine-full-5CfYQwQPYyS4LXpfu3YSpiDhvQrZJB3rCT98mA2ZtxcS4t62": [
+   "a03c580f-01f4-5e3a-baa4-9ce9ac37cc69"
+  ],
+  "halen214/affine-name-5DJGLU5917iojsdJ9VDHHpwU2eh1QEFhbN4sEEvAUdLbQuXC": [
+   "a4d621aa-169c-532c-90c2-20c1b56adfea"
+  ],
+  "halen214/affine-name-5Gk45dfWQXe983QMHHzWGFbtUpsrJwrmcSkVs8RytVVAuqao": [
+   "a628b4d3-5914-5a4e-b525-90a9aa49ed9d"
+  ],
+  "NickDegollado0714/Affine-5Gh2RhG3Ee9mGKa9xHccWcPbPT2wzz8zwJyHFyT6cqWQWtSi": [
+   "a759bac5-08a1-589b-b485-4d7764eb9f44"
+  ],
+  "deepseek-ai/DeepSeek-R1": [
+   "a77cfe8b-fdf5-5f2d-a613-f8958bbe893c"
+  ],
+  "final-round/Affine-Disc_5G3Vc84iut46a99YRZrQoa9kmHnEpCzJoVVzVxWayrR5dbEE": [
+   "a971dab9-74ca-5f8f-839e-b14a46756736"
+  ],
+  "catusesAI/Affine-e4-live-5CA3SBzmb1BmZJtidhVFoU65rat5JYS3aYriEKpQbSmp5vzi": [
+   "aa0fe9fa-8d8f-5a29-8b43-b00d2c870e51"
+  ],
+  "vera6/affine-multi": [
+   "aa605b6d-cb07-5fc9-a413-a0d63838d829"
+  ],
+  "ivichsoon/affine-5F1qnJUsasELL8DPSTFLngD4F9X2RAtZbezQy6G8rQkW6VyY": [
+   "ab3d7a33-0bbf-59f9-b3d4-002918d0a025"
+  ],
+  "vera6/affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g": [
+   "aca5373b-ab2f-5a5e-bd89-1bade1411f18"
+  ],
+  "duckknowsAI/Affine-Duck-5FUNpXswwBPbYZfuJxEsgSdEx4bonLteeEzmBXapRxrPg4Kf": [
+   "ae206d64-501c-5d12-9618-f6e7c45bd098"
+  ],
+  "NousResearch/Hermes-4-405B-FP8": [
+   "b07349e6-3313-5945-8887-6fc4aca0dbf0"
+  ],
+  "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDCy4uT": [
+   "b1eee7fd-dd36-5d3c-bb47-2e4a64af7aa3"
+  ],
+  "JRohner/affine-qwen3-480-5HSmJpVjxofnwa7EtuoGyic2aSWKYaCQf6qADLc7ytNdfJNU": [
+   "b38a1518-578b-5151-89e9-eea6a043ac16"
+  ],
+  "IsaacMiliband/affine-KING-5EAD8NUiwxdgPQsWDh16dZo7z769FCKwHprKfzTFcp7KoW9T": [
+   "b38a5631-2c9f-54c2-9138-0168bb2495e1"
+  ],
+  "zai-org/GLM-4.5-FP8": [
+   "b5326e54-8d9e-590e-bed4-f3db35d9d4cd"
+  ],
+  "diagonalge/grads32b-iteration8": [
+   "b7090888-83cc-5878-82dd-62206dfa83ee"
+  ],
+  "naruto1208/affine-k-9-5EWSasAgABTaNwkLMudKKCZw8WZKbiNMcQrHKUUMwMoWsxRj": [
+   "b8a6f23b-753a-57e3-93c9-5492b5dd7886"
+  ],
+  "Kingaimaster/affine-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g": [
+   "bafe0ff5-eec0-5a49-9ef1-4e29c11c387f"
+  ],
+  "yoloex/Affine-5EPG7bUMtGNXVhw5qweugZaZPCTEshx1d34p2u4nXnDC": [
+   "bcfad15f-0c07-524f-bca4-ea2a83917d58"
+  ],
+  "IsaacMiliband/affine-KING-5EJ65YZpbxihyyTXzdysZuc2wnzDazMyNACwJBK9q4pDDFr2": [
+   "c5a7ba6c-12cc-5f45-b5c4-19014b6aab17"
+  ],
+  "sm7rt/Affine-5FToCzSZbwfUPgcTvgvVZiJP192aAfxMAEguQKUNSj8G1esX": [
+   "c6cb0b2e-201b-58b1-8b77-b26c7ab76f9d"
+  ],
+  "void-818/Affine-top4_v4-5F2JV4RvwPyAPe9axBri86v18DY35gdKpVQQg7K1bNCCDbDY": [
+   "c7a642a4-16f1-5af7-84f6-979fa279cf99"
+  ],
+  "Petro-B/affine-1201": [
+   "c7e75135-89b8-5894-8541-493960d8e6b3"
+  ],
+  "OpenGVLab/InternVL3-78B": [
+   "ca9c77ec-c932-5aac-9c21-c584ce2e1847"
+  ],
+  "halen214/affine-name-5C8BFsefAdHVS1ZhbxpWRkNR3PYTHC64AvhqyQT8AcArVUtM": [
+   "cd9876b9-edbe-5a39-8b64-c13ee85095ab"
+  ],
+  "Pogromind/affine-5Dtb9SXVWCriPKNAePX1ZUEhke3SjkQBAYJqEKH5AfKuKSvQ": [
+   "cd9e0958-d16f-5561-8806-a2a6e54f72fb"
+  ],
+  "ineso22/affine-spike-5EkAmx18DbosJzUAmMqm7cVsXcpiJEC8Avv7nehAJ5V2CNSe": [
+   "cda78ec6-9df9-56a1-bd96-47360ae8d4cd"
+  ],
+  "godninja/Affine-king_v1-5CkSCRSNNMrVy8bwAfuDWqLqNYAEc3shDJZUtQ4Rjboi2zFT": [
+   "ce8be23b-28e5-506b-8a18-1be9dddcb45e"
+  ],
+  "silentfly/Affine-qwen0203-5FgjroARbfhQjRDSgqrBwPziLANQ6dGgs3cJqdrdnwgy94Z7": [
+   "cef60630-7c17-53b0-9e16-8582c7b19c20"
+  ],
+  "boweizh1204/affine-5FpoYFUqSisMMXCde1swhZWjd28RJaWQXZkFxep5qLwXy7eW": [
+   "cffd2cbc-9654-56a6-9909-60779f81a28c"
+  ],
+  "Qwen/Qwen3-14B": [
+   "d0cbdf3d-050a-5432-97d2-ea99277d7934"
+  ],
+  "sharon9018/Affine-update-32-5DV5SWR7BXRfQTRRTGsBhEu7aJVXKb1TF7kYfG9o1L3jNi9i": [
+   "d39fec90-3aa3-5550-afca-daf683855bc6"
+  ],
+  "affine123456/Affine-No1-5Fej7vwRLjLEUqHvEU7h6QfkQbFXxsXjPh3CZMA7PfdVuXBZ": [
+   "d3b7722d-d3b8-53e8-ae96-aa0ca0576644"
+  ],
+  "AnastasiaFantasy/affine-ana11-3-5CJXygeziPM2F8C1bhupwAKpKmx28cw1zD15Eoa5QbFPSXXE": [
+   "d90ace58-df8f-5ebb-92d2-012f2c650f16"
+  ],
+  "catusesAI/Affine-ed34-0201-5CVXLMt2LpRJ6WgK5mcnNS8yMRzG8fH9MJdEwQNHgKFFqb6x": [
+   "d9f2def7-241d-5160-9f98-3907be024b27"
+  ],
+  "morningtea006/affine-horse-5Hg1K2prUdnvSnG7m3mZBmF9hyo8zu8Z4miJSYsfe9Hpvgcu": [
+   "dbc38885-e9e7-5dd3-a6a7-bb27de215aa8"
+  ],
+  "AnastasiaFantasy/affine-ana7-8-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP": [
+   "e061fad6-8baa-5650-bf94-f72584c6445c"
+  ],
+  "target919/affine-nb-test-1-5GGfD8FvqVmewdaYiDBVgYWPsxX8yupkt715gWRBfNpJ3T6Q": [
+   "e0e6f902-9da4-55b0-a380-8eb2d31fd3cd"
+  ],
+  "aminadev/Affine-q-5FPFMo7wichCnhgYb8RU2ezgF86QTRBk2eh3Y5P6cuwZEYJV": [
+   "e18a8282-4fbb-5b61-a4f4-25263f3b03f6"
+  ],
+  "deepseek-ai/DeepSeek-R1-Distill-Llama-70B": [
+   "e282615a-094f-5c87-8918-a0846722f1db"
+  ],
+  "curli12/Affine-2m8d-5FZNvCq99HQubesSSKumcEfmXckRhHadCw7sPf6Zq9gUnoxr": [
+   "e2dc7304-4efc-57c7-9436-ab5040256565"
+  ],
+  "weirek/Affine-5Eee8m2MbQiAUR3QGixeiAAPYos9AzqRfQpx1Rb59YHB1CgT": [
+   "e458b2cd-dea8-54a3-a46d-7e8a67b6bed3"
+  ],
+  "void-818/Affine-luca_v11-5CtFSMCbvHryns4E7YrACNDyFYAcxGU9SkokGPHiJuvPNUci": [
+   "e5852599-4330-56ad-9983-d43cd9fd1502"
+  ],
+  "curli12/Affine-2m11d-5G6p2ogtftr3RHnNSLacHEmQ33zj7mAqjKi8Rp56wvCGZchK": [
+   "e8ce8a1a-75ba-5d99-89d5-99a5bdd55a02"
+  ],
+  "ATL-Machine/affine-infinite-5ETyoog2ttXGSu5UhxhrLtjdL1BSbo2SeELdFAp1YBimQuq9": [
+   "e8d5c2e3-4df4-5993-83f6-1c5cda8a895e"
+  ],
+  "ATL-Machine/affine-A-2-5HTWAtx1sD8JH35WrPYMbUvGwvHyxRit8oAAuEcbeD2ed451": [
+   "ec9c8926-826e-5e09-a7b3-2ef3d1728079"
+  ],
+  "rhuanmatias/Affine-03-5DtfHKxiDwrfHN4KvzX7UKgVJHQFRHwHvm3hYT9NMg5MA68z": [
+   "edc8e87b-81d4-5bbf-bf80-1b1df44179be"
+  ],
+  "unsloth/Llama-3.2-1B-Instruct": [
+   "edd0810e-51f8-5119-b480-09c950812833"
+  ],
+  "AnastasiaFantasy/affine-ana7-7-5GjSkThXryhvmJCuAoa7xVpBwBC9BXwL6ySQoutHii5Yb5PP": [
+   "ee49947f-0b9c-5830-b3d7-79adba98a5b6"
+  ],
+  "curli12/Affine-2m12d-5FUFEuZqiLU9GxpHTcojBBvr5gS6sqcnqBQr1sUxNgLhP7B4": [
+   "eed04b40-7980-515e-9b30-4918f3946b64"
+  ],
+  "target919/affine-f-test-1-5DV5SWR7BXRfQTRRTGsBhEu7aJVXKb1TF7kYfG9o1L3jNi9i": [
+   "f0f2bcdc-357b-5d95-9f27-b69cc049d7f4"
+  ],
+  "denys0x83/affine-5CDUswY2ZK2nXnkaWhBAWD47CQE3KvMm6AyKhJ1Txm5R5tdi": [
+   "f124150e-f3f5-5c4f-b199-a93867df4c46"
+  ],
+  "datlab75/Affine-HaruUrara-5EZUMjcsN4AdSGwVhwiNpruEbHD3QiLbKhAHeionQqyrcvTQ": [
+   "f2465035-f667-54ee-adb8-4ee09b426bc0"
+  ],
+  "danielrodriguez000/affine-Q-5GNi9WnuGCnrpssb1BT5VgzseXSdijWwgS9MZ7PHGTr3TBDS": [
+   "f2a83969-c445-5a51-9d8c-518447e571a0"
+  ],
+  "Cheeeeeeeeky/affine-clavicular-5E7FojcAfo5NMbPvZxbdLFUf3AM1xvqG7bPY8tpF8UjMHBYe": [
+   "f30f072c-7482-5bef-b856-0d596e82c20e"
+  ],
+  "weirek/Affine-0213-5F7YrqLcPBeoWeNu4ZzAy8xvnPSwfR135J7bYMSVpfkUHpqF": [
+   "f6966839-00b1-5eff-8496-c40e253f4d3e"
+  ],
+  "deepseek-ai/DeepSeek-V3": [
+   "fa4181ad-0cf1-5531-afdb-bbffbf2ff945"
+  ],
+  "tomascooler/affine-wh0-5FzxcV9qRtCuZRic8PyD3Zv7JSzbzqDeRa3yB5d94bahmPuZ": [
+   "fafdbd01-4959-51f1-a6d4-8cfb43eb32c0"
+  ],
+  "void-818/Affine-star_v8-5Dy7KFivuHcFtLMM4PYnzkCgyAo7B3wRMft1CWur2jEzEmtQ": [
+   "fdf40cbf-5719-56f9-9cd1-a843949fbca4"
+  ],
+  "ATL-Machine/affine-A-1-5GEc6UzXjDCDxcE7cpB8yxW3g83gSNFVQYZJZRYMQXdkBU6Y": [
+   "feaa9f56-948d-56db-8923-c2c94e2d0486"
+  ],
+  "Lucas989/Affine-210-5GEBwWqV24U7bEYQSvra1xfJJsRLSx1r9khMqXdhcLc4q821": [
+   "ff3e05ad-8ab7-5dc5-8c7f-b8cfede43911"
+  ],
+  "aiseosae/Affine-yellow-5Gc21jWvHzD9zZth9EgbiiS6u12F18sbL8SkbqEFTq9GLqpQ": [
+   "ffda3d3c-23d8-555c-8d21-8d0f680d7327"
+  ]
+ }
+}

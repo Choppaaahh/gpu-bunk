@@ -1,0 +1,83 @@
+From b861508d22cc25957a657fac6d62981c074ba8c4 Mon Sep 17 00:00:00 2001
+From: gpu-bunk <noreply@example.invalid>
+Date: Mon, 12 Oct 2026 17:15:06 -0400
+Subject: [PATCH 2/5] Let an engine built inside the pool's scope draw from the
+ shared pool
+
+Three small seams: the shared block pool, a common block unit, and one shared
+KV buffer.
+---
+ vllm/v1/core/kv_cache_coordinator.py |  8 +++++++-
+ vllm/v1/core/kv_cache_utils.py       | 11 ++++++++++-
+ vllm/v1/worker/utils.py              |  7 ++++++-
+ 3 files changed, 23 insertions(+), 3 deletions(-)
+
+diff --git a/vllm/v1/core/kv_cache_coordinator.py b/vllm/v1/core/kv_cache_coordinator.py
+index afb03ac..517d826 100644
+--- a/vllm/v1/core/kv_cache_coordinator.py
++++ b/vllm/v1/core/kv_cache_coordinator.py
+@@ -95,7 +95,13 @@ class KVCacheCoordinator(ABC):
+         self.scheduler_block_size = scheduler_block_size
+         self.num_reprefillable_tokens = max(0, num_prefill_lookahead - 1)
+ 
+-        self.block_pool = BlockPool(
++        # Inside shared_kv.engine_scope() the engine draws from a
++        # view of ONE pool shared with other models in this process.
++        from vllm.v1.core import shared_kv
++
++        self.block_pool = shared_kv.injected_block_pool(
++            kv_cache_config.num_blocks, enable_caching, hash_block_size
++        ) or BlockPool(
+             num_gpu_blocks=kv_cache_config.num_blocks,
+             enable_caching=enable_caching,
+             hash_block_size=hash_block_size,
+diff --git a/vllm/v1/core/kv_cache_utils.py b/vllm/v1/core/kv_cache_utils.py
+index 28478b6..9e264cb 100644
+--- a/vllm/v1/core/kv_cache_utils.py
++++ b/vllm/v1/core/kv_cache_utils.py
+@@ -1608,7 +1608,10 @@ def _get_kv_cache_bytes_per_block(
+     ]
+     if hot_page_sizes:
+         bytes_per_block = round_up(bytes_per_block, math.lcm(*hot_page_sizes))
+-    return bytes_per_block
++    # Several models share one buffer with a common unit U per block.
++    from vllm.v1.core import shared_kv
++
++    return shared_kv.bytes_per_block_override(bytes_per_block) or bytes_per_block
+ 
+ 
+ def validate_kv_cache_layout(
+@@ -1745,6 +1748,12 @@ def get_kv_cache_config_from_groups(
+     layout = vllm_config.cache_config.get_resolved_kv_cache_layout()
+     validate_kv_cache_layout(layout, kv_cache_groups)
+     bytes_per_block = _get_kv_cache_bytes_per_block(kv_cache_groups)
++    from vllm.v1.core import shared_kv
++
++    if shared_kv.bytes_per_block_override(1) and not layout.is_block_outermost:
++        raise ValueError(
++            f"A shared KV unit needs a block-outermost layout, got {layout.name}"
++        )
+     interleaved_block_stride = bytes_per_block if layout.is_block_outermost else None
+ 
+     num_blocks = available_memory // bytes_per_block
+diff --git a/vllm/v1/worker/utils.py b/vllm/v1/worker/utils.py
+index df2ebc7..19c5373 100644
+--- a/vllm/v1/worker/utils.py
++++ b/vllm/v1/worker/utils.py
+@@ -418,7 +418,12 @@ def allocate_kv_cache(
+         buf_size = ((raw_size + page_size - 1) // page_size) * page_size
+     else:
+         buf_size = raw_size
+-    buf = torch.zeros(buf_size, dtype=torch.int8, device=device)
++    # Inside shared_kv.engine_scope() every model views ONE buffer.
++    from vllm.v1.core import shared_kv
++
++    buf = shared_kv.injected_kv_buffer(buf_size)
++    if buf is None:
++        buf = torch.zeros(buf_size, dtype=torch.int8, device=device)
+ 
+     kv_caches: dict[str, torch.Tensor] = {}
+     for tensor in kv_cache_config.kv_cache_tensors:
+-- 
+2.39.5
+

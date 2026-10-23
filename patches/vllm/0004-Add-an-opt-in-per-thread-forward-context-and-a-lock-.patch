@@ -1,0 +1,254 @@
+From 1ba3c855856636145757df602799a7fe0d6c8210 Mon Sep 17 00:00:00 2001
+From: Choppaaahh <choppaaahh@users.noreply.github.com>
+Date: Tue, 13 Oct 2026 06:28:15 -0400
+Subject: [PATCH 4/5] Add an opt-in per-thread forward context, and a lock and
+ in-flight rule for the meta-scheduler
+
+---
+ vllm/forward_context.py              |  37 +++++++--
+ vllm/v1/core/sched/meta_scheduler.py | 107 ++++++++++++++++++++++-----
+ vllm/v1/worker/ubatching.py          |   4 +-
+ 3 files changed, 121 insertions(+), 27 deletions(-)
+
+diff --git a/vllm/forward_context.py b/vllm/forward_context.py
+index 8d9eb5d..f174ad6 100644
+--- a/vllm/forward_context.py
++++ b/vllm/forward_context.py
+@@ -1,6 +1,8 @@
+ # SPDX-License-Identifier: Apache-2.0
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ 
++import os
++import threading
+ import time
+ from collections import defaultdict
+ from contextlib import contextmanager
+@@ -195,18 +197,40 @@ class ForwardContext:
+ 
+ _forward_context: ForwardContext | None = None
+ 
++# Opt-in per-thread forward context, so two engines in ONE process
++# can run forwards on two threads at once. Stock keeps one module global, which two
++# free-running threads would overwrite (attention resolves its layer BY NAME from it,
++# and two models can share layer names). Read once at import; default = stock.
++_TLS_FORWARD_CONTEXT = os.environ.get("VLLM_GPU_BUNK_TLS_FORWARD_CONTEXT") == "1"
++_forward_context_tls = threading.local()
++
++
++def _get_fc() -> ForwardContext | None:
++    if _TLS_FORWARD_CONTEXT:
++        return getattr(_forward_context_tls, "ctx", None)
++    return _forward_context
++
++
++def _set_fc(ctx: ForwardContext | None) -> None:
++    global _forward_context
++    if _TLS_FORWARD_CONTEXT:
++        _forward_context_tls.ctx = ctx
++    else:
++        _forward_context = ctx
++
+ 
+ def get_forward_context() -> ForwardContext:
+     """Get the current forward context."""
+-    assert _forward_context is not None, (
++    ctx = _get_fc()
++    assert ctx is not None, (
+         "Forward context is not set. "
+         "Please use `set_forward_context` to set the forward context."
+     )
+-    return _forward_context
++    return ctx
+ 
+ 
+ def is_forward_context_available() -> bool:
+-    return _forward_context is not None
++    return _get_fc() is not None
+ 
+ 
+ def in_piecewise_cudagraph() -> bool:
+@@ -256,13 +280,12 @@ def override_forward_context(forward_context: ForwardContext | None):
+     This is used to override the forward context for a specific
+     forward pass.
+     """
+-    global _forward_context
+-    prev_context = _forward_context
+-    _forward_context = forward_context
++    prev_context = _get_fc()
++    _set_fc(forward_context)
+     try:
+         yield
+     finally:
+-        _forward_context = prev_context
++        _set_fc(prev_context)
+ 
+ 
+ @contextmanager
+diff --git a/vllm/v1/core/sched/meta_scheduler.py b/vllm/v1/core/sched/meta_scheduler.py
+index feaa5c5..7ba3b12 100644
+--- a/vllm/v1/core/sched/meta_scheduler.py
++++ b/vllm/v1/core/sched/meta_scheduler.py
+@@ -8,10 +8,26 @@ running request of the model most above its floor, only while that model stays a
+ above its own floor, and stops as soon as W's need fits. A model at or above its
+ floor never triggers a cross-model preemption. Each per-model Scheduler still
+ preempts its OWN requests the stock way.
++
++Concurrency: engines may step on different threads, or several
++engines may have a batch launched at once from one thread. Two rules make that safe:
++1. One re-entrant `lock` serializes every CPU-side touch of the shared pool and of
++   the schedulers' queues: arbitrate, schedule, update_from_output, add_request,
++   finish_requests (`guard()` wraps a Scheduler's methods with it). GPU forwards run
++   outside the lock.
++2. A model is IN FLIGHT from a schedule() that scheduled tokens until its
++   update_from_output(). arbitrate() never picks an in-flight victim: freeing its
++   blocks would hand them to another model while the victim's forward may still be
++   writing them, and its update_from_output would see a request it no longer runs.
++   The waiting model retries at its next arbitrate (counted in `skipped_in_flight`).
++   A block a model frees in update_from_output is safe to hand out: that call runs
++   after the host has synchronized on the model's sampled tokens, which are produced
++   on the same stream after every KV write of that step (sync scheduling only).
+ """
+ 
+ from __future__ import annotations
+ 
++import threading
+ import time
+ from collections.abc import Callable
+ from dataclasses import dataclass, field
+@@ -71,6 +87,9 @@ class MetaScheduler:
+     floors: dict[str, int]
+     events: list[MetaEvent] = field(default_factory=list)
+     step_no: int = 0
++    lock: threading.RLock = field(default_factory=threading.RLock)
++    in_flight: set = field(default_factory=set)
++    skipped_in_flight: int = 0
+ 
+     def _req_blocks(self, sched, req) -> int:
+         ids = sched.kv_cache_manager.get_block_ids(req.request_id)
+@@ -80,25 +99,76 @@ class MetaScheduler:
+         return cdiv(req.num_tokens, sched.block_size)
+ 
+     def arbitrate(self, model: str) -> None:
++        with self.lock:
++            sched = self.engines[model]
++            if not sched.waiting:
++                return
++            head = sched.waiting.peek_request()
++            held = {m: self.shared.held(m) for m in self.engines}
++            free = self.shared.base.get_num_free_blocks()
++            need = self._need(sched, head)
++            victim_blocks = {
++                m: ([] if (m != model and m in self.in_flight) else
++                    [self._req_blocks(s, r) for r in reversed(s.running)])
++                for m, s in self.engines.items()
++            }
++            plan = plan_cross_model_preemptions(
++                model, need, free, held, self.floors, victim_blocks,
++            )
++            if not plan and any(m != model for m in self.in_flight):
++                full = {m: [self._req_blocks(s, r) for r in reversed(s.running)]
++                        for m, s in self.engines.items()}
++                if plan_cross_model_preemptions(model, need, free, held,
++                                                self.floors, full):
++                    self.skipped_in_flight += 1
++            for victim in plan:
++                assert victim not in self.in_flight, victim
++                vs = self.engines[victim]
++                req = vs.running.pop()  # newest, same choice as stock FCFS preemption
++                vs._preempt_request(req, time.monotonic())
++                self.events.append(MetaEvent(self.step_no, model, victim,
++                                             req.request_id, held[model],
++                                             self.floors[model]))
++
++    def guard(self, model: str) -> None:
++        """Wrap `engines[model]`'s pool-touching methods with the lock and track
++        in-flight batches (instance attributes; the class is untouched)."""
+         sched = self.engines[model]
+-        if not sched.waiting:
++        if getattr(sched, "_gpu_bunk_guarded", False):
+             return
+-        head = sched.waiting.peek_request()
+-        held = {m: self.shared.held(m) for m in self.engines}
+-        victim_blocks = {
+-            m: [self._req_blocks(s, r) for r in reversed(s.running)]
+-            for m, s in self.engines.items()
+-        }
+-        plan = plan_cross_model_preemptions(
+-            model, self._need(sched, head), self.shared.base.get_num_free_blocks(),
+-            held, self.floors, victim_blocks,
+-        )
+-        for victim in plan:
+-            vs = self.engines[victim]
+-            req = vs.running.pop()  # newest, same choice as stock FCFS preemption
+-            vs._preempt_request(req, time.monotonic())
+-            self.events.append(MetaEvent(self.step_no, model, victim, req.request_id,
+-                                         held[model], self.floors[model]))
++        schedule, update = sched.schedule, sched.update_from_output
++        add, finish = sched.add_request, sched.finish_requests
++
++        def g_schedule(*a, **k):
++            with self.lock:
++                assert model not in self.in_flight, f"{model} scheduled twice"
++                so = schedule(*a, **k)
++                if so.total_num_scheduled_tokens > 0:
++                    self.in_flight.add(model)
++                return so
++
++        def g_update(*a, **k):
++            with self.lock:
++                try:
++                    return update(*a, **k)
++                finally:
++                    self.in_flight.discard(model)
++
++        def g_add(*a, **k):
++            with self.lock:
++                return add(*a, **k)
++
++        def g_finish(*a, **k):
++            with self.lock:
++                return finish(*a, **k)
++
++        sched.schedule, sched.update_from_output = g_schedule, g_update
++        sched.add_request, sched.finish_requests = g_add, g_finish
++        sched._gpu_bunk_guarded = True
++
++    def held_snapshot(self) -> dict[str, int]:
++        with self.lock:
++            return {m: self.shared.held(m) for m in self.engines}
+ 
+     def step(self, make_output: Callable) -> dict:
+         """One round: per model, arbitrate, schedule, run (fake or real), update."""
+@@ -107,5 +177,6 @@ class MetaScheduler:
+             self.arbitrate(model)
+             so = sched.schedule()
+             outs[model] = sched.update_from_output(so, make_output(model, sched, so))
+-        self.step_no += 1
++        with self.lock:
++            self.step_no += 1
+         return outs
+diff --git a/vllm/v1/worker/ubatching.py b/vllm/v1/worker/ubatching.py
+index 6d06ba2..cc39056 100644
+--- a/vllm/v1/worker/ubatching.py
++++ b/vllm/v1/worker/ubatching.py
+@@ -72,7 +72,7 @@ class UBatchContext:
+         return False
+ 
+     def _restore_context(self):
+-        forward_context._forward_context = self.forward_context
++        forward_context._set_fc(self.forward_context)
+ 
+     def update_stream(self, stream):
+         self.current_stream = stream
+@@ -95,7 +95,7 @@ class UBatchContext:
+         # It is critical for correctness that only one thread is running
+         # at a time. These asserts just make sure that this is the only
+         # thread running before waking the other one up and going to sleep
+-        assert forward_context._forward_context == self.forward_context
++        assert forward_context._get_fc() == self.forward_context
+         assert current_stream() == self.current_stream
+         assert not self.cpu_wait_event.is_set()
+ 
+-- 
+2.39.5
+

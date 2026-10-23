@@ -1,0 +1,20 @@
+gpu-bunk
+Copyright 2026 the gpu-bunk contributors
+
+This repository includes or builds on third-party work:
+
+- patches/vllm/ are patches to vLLM (https://github.com/vllm-project/vllm), v0.30.0.
+  vLLM is licensed under the Apache License 2.0. Copyright contributors to the vLLM project.
+
+- bench/multigpu/inputs/prompts.jsonl is an excerpt of databricks-dolly-15k
+  (https://huggingface.co/datasets/databricks/databricks-dolly-15k), licensed under CC BY-SA 3.0.
+  That file stays under CC BY-SA 3.0. bench/multigpu/inputs/build_prompts.py rebuilds it from the pinned source.
+
+- The fleet simulator replays the Chutes trace (https://github.com/HarvardMadSys/chutes_workload;
+  W. Nixon, J. Durbin, F. Standhartinger, H. S. Gunawi and J. Yang, "A Year in LLM Serving: Workload Evolution,
+  Caching and Load-Balancing", arXiv 2608.13573), licensed under CC BY 4.0. The trace itself is not included here.
+  data/ holds four small files derived from it (a per-model demand summary, a size census and a lineage census).
+  They are shared under CC BY 4.0. DATA.md says how each was made and what we changed.
+
+- scripts/aegaeon_repro.py re-implements the scheduler described in "Aegaeon" (SOSP 2025) from the paper.
+  No code from that work is included.

@@ -1,0 +1,38 @@
+{
+ "tag": "h100_step_H",
+ "out": "runs/h100_step_H",
+ "harness_dir": "bench/h100_step",
+ "extra_files": [
+  "scripts/h100_step.py",
+  "bench/multigpu/gpu_driver.py",
+  "bench/multigpu/gpu_score.py"
+ ],
+ "exclude": [
+  "__pycache__"
+ ],
+ "workdir": "/root/h100",
+ "mkdirs": [
+  "rows",
+  "logs"
+ ],
+ "prep": [],
+ "items": [
+  "rows",
+  "logs",
+  "m_q8",
+  "m_q14",
+  "DONE",
+  "ARM_DONE_q8",
+  "ARM_DONE_q14"
+ ],
+ "cpu": 8,
+ "mem_mib": 32768,
+ "mem_limit_mib": 65536,
+ "cmd": "python3 h100_step.py --run --plan plan_H.json",
+ "env": {
+  "H2960_DEADLINE_REL": "970"
+ },
+ "gpu": "H100!",
+ "timeout_s": 1080,
+ "cmd_timeout_s": 990
+}

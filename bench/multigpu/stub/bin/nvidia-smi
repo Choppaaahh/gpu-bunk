@@ -1,0 +1,7 @@
+#!/bin/sh
+# stub nvidia-smi (CPU host smoke only): topo -m prints an NV12 pair; a --query-gpu with -i prints ONE healthy A100 line
+case "$*" in
+  *"topo -m"*) printf '\tGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\nGPU0\t X \tNV12\t0-47\t0\nGPU1\tNV12\t X \t0-47\t0\n' ;;
+  *--query-gpu*) echo "P0, 1410, 1410, 390.0, 100, 4, 4, 400.00" ;;
+  *) echo "STUB nvidia-smi: A100-SXM4-40GB x2" ;;
+esac

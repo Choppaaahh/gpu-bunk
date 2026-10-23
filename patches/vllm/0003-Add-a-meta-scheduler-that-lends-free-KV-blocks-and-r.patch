@@ -1,0 +1,131 @@
+From dac21d2ac3e6e5652a443c732601c22f14ee1e26 Mon Sep 17 00:00:00 2001
+From: gpu-bunk <noreply@example.invalid>
+Date: Mon, 12 Oct 2026 17:15:06 -0400
+Subject: [PATCH 3/5] Add a meta-scheduler that lends free KV blocks and
+ reclaims them with per-model floors
+
+---
+ vllm/v1/core/sched/meta_scheduler.py | 111 +++++++++++++++++++++++++++
+ 1 file changed, 111 insertions(+)
+ create mode 100644 vllm/v1/core/sched/meta_scheduler.py
+
+diff --git a/vllm/v1/core/sched/meta_scheduler.py b/vllm/v1/core/sched/meta_scheduler.py
+new file mode 100644
+index 0000000..feaa5c5
+--- /dev/null
++++ b/vllm/v1/core/sched/meta_scheduler.py
+@@ -0,0 +1,111 @@
++# SPDX-License-Identifier: Apache-2.0
++"""Thin meta-scheduler over N per-model Schedulers sharing one KV pool.
++
++Policy (lend-and-reclaim with floors): any model may borrow every free block. When
++model W has waiting work that cannot allocate, W holds fewer than floor[W] blocks and
++the pool has fewer free blocks than W needs, the meta-scheduler preempts the NEWEST
++running request of the model most above its floor, only while that model stays at or
++above its own floor, and stops as soon as W's need fits. A model at or above its
++floor never triggers a cross-model preemption. Each per-model Scheduler still
++preempts its OWN requests the stock way.
++"""
++
++from __future__ import annotations
++
++import time
++from collections.abc import Callable
++from dataclasses import dataclass, field
++
++from vllm.utils.math_utils import cdiv
++from vllm.v1.core.shared_kv import SharedKVPool
++
++
++def plan_cross_model_preemptions(
++    waiting_model: str,
++    need: int,
++    free: int,
++    held: dict[str, int],
++    floors: dict[str, int],
++    victim_req_blocks: dict[str, list[int]],
++) -> list[str]:
++    """Return the models to preempt one newest request from, in order.
++
++    `victim_req_blocks[m]` lists the blocks held by m's running requests, newest first.
++    Pure function: no side effects, so the policy is testable without a scheduler.
++    """
++    if free >= need or held[waiting_model] >= floors[waiting_model]:
++        return []
++    held = dict(held)
++    queues = {m: list(v) for m, v in victim_req_blocks.items()}
++    plan: list[str] = []
++    while free < need:
++        candidates = [
++            m for m in held
++            if m != waiting_model and queues.get(m)
++            and held[m] - queues[m][0] >= floors[m]
++        ]
++        if not candidates:
++            return plan if free >= need else []  # cannot fit: preempt nothing
++        victim = max(candidates, key=lambda m: held[m] - floors[m])
++        blocks = queues[victim].pop(0)
++        held[victim] -= blocks
++        free += blocks
++        plan.append(victim)
++    return plan
++
++
++@dataclass
++class MetaEvent:
++    step: int
++    waiting_model: str
++    victim: str
++    victim_req: str
++    waiting_held: int
++    waiting_floor: int
++
++
++@dataclass
++class MetaScheduler:
++    shared: SharedKVPool
++    engines: dict  # model -> Scheduler
++    floors: dict[str, int]
++    events: list[MetaEvent] = field(default_factory=list)
++    step_no: int = 0
++
++    def _req_blocks(self, sched, req) -> int:
++        ids = sched.kv_cache_manager.get_block_ids(req.request_id)
++        return sum(len(g) for g in ids)
++
++    def _need(self, sched, req) -> int:
++        return cdiv(req.num_tokens, sched.block_size)
++
++    def arbitrate(self, model: str) -> None:
++        sched = self.engines[model]
++        if not sched.waiting:
++            return
++        head = sched.waiting.peek_request()
++        held = {m: self.shared.held(m) for m in self.engines}
++        victim_blocks = {
++            m: [self._req_blocks(s, r) for r in reversed(s.running)]
++            for m, s in self.engines.items()
++        }
++        plan = plan_cross_model_preemptions(
++            model, self._need(sched, head), self.shared.base.get_num_free_blocks(),
++            held, self.floors, victim_blocks,
++        )
++        for victim in plan:
++            vs = self.engines[victim]
++            req = vs.running.pop()  # newest, same choice as stock FCFS preemption
++            vs._preempt_request(req, time.monotonic())
++            self.events.append(MetaEvent(self.step_no, model, victim, req.request_id,
++                                         held[model], self.floors[model]))
++
++    def step(self, make_output: Callable) -> dict:
++        """One round: per model, arbitrate, schedule, run (fake or real), update."""
++        outs = {}
++        for model, sched in self.engines.items():
++            self.arbitrate(model)
++            so = sched.schedule()
++            outs[model] = sched.update_from_output(so, make_output(model, sched, so))
++        self.step_no += 1
++        return outs
+-- 
+2.39.5
+

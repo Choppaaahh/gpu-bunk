@@ -1,0 +1,4 @@
+#!/bin/sh
+# stub: `vllm serve ...` -> the fake server (CPU host smoke only)
+shift
+exec python3 "$(dirname "$0")/../fake_vllm.py" serve "$@"
