@@ -1,12 +1,15 @@
 __pycache__/
 *.pyc
 # large or re-fetchable inputs and run outputs stay out of git (see DATA.md);
-# the four small derived inputs the fleet simulation reads are tracked
+# the four small derived inputs the fleet simulation reads, and the codec's three measurement files, are tracked
 /data/**
 !/data/**/
 !/data/traces/derived/chutes_w1_analysis.json
 !/data/size_census/census.json
 !/data/size_census/demand_R2.json
 !/data/lineage_census/census.json
+!/data/lossless/evalset.json
+!/data/lossless/roundtrip_v2.json
+!/data/lossless/bench_v1.json
 runs/
 out/

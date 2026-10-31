@@ -81,13 +81,29 @@ The published copies differ from the files our runs used in fields the simulatio
 
 The sha256 pins in `scripts/fabric_sim_v2.py` match the published files. The lineage census is unchanged.
 
+## The codec (`lossless_bf16.py`)
+
+`data/lossless/` holds our own measurements of public Hugging Face model files. It contains no model weights.
+
+| Path under `data/` | Bytes | sha256 | What it is |
+|---|---|---|---|
+| `lossless/evalset.json` | 15,030 | `6ce59efa317e9130280b4d7336aa48a606d18852adc887e8ba5dc0932990b2ff` | The 36 files (repo, file name, size, sha256) and our v1 container size for each file and each fine-tune's delta |
+| `lossless/roundtrip_v2.json` | 113,739 | `14f6dcb45f94cacb39e4df7d9e94a6f1cf73642b7f3bb2557ec62cc0f462a6cd` | Our `--roundtrip-v2` output over the eval set (every setting, every file, 2026-10-30) |
+| `lossless/bench_v1.json` | 26,903 | `ceda3e90b36a22e7b3bf6ecc2693cbda12b4be414ace5d2dae6b8b67f16b0e53` | Our `--bench` output on one 16-core host (2026-10-30) |
+
+Only descriptive fields changed when we published them. The eval set and the bench have new descriptions, the bench a new
+note on which code it ran, and the private file references are gone: two were removed, and the round trip's eval-set
+path now points at `data/lossless/evalset.json`. No measured value changed. Each model's own license covers its weights;
+the repo names in the eval set say where to get them.
+
 ## License
 
-The files under `data/` are derived from the Chutes trace and its model map, and are shared under
+The files under `data/traces/`, `data/size_census/` and `data/lineage_census/` are derived from the Chutes trace and its
+model map, and are shared under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), like the trace. We aggregated requests per minute and per model
 and computed the summaries above. Please cite the trace's paper (above) if you use them.
 
 ## Other runs
 
 The GPU benchmarks need no data: they download pinned models from Hugging Face. The Aegaeon comparison reads outputs of
-earlier GPU runs that are not published yet (see [REPRODUCE.md](REPRODUCE.md) § 7).
+earlier GPU runs that are not published yet (see [REPRODUCE.md](REPRODUCE.md) § 8).

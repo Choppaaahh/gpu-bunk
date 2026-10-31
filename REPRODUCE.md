@@ -129,10 +129,65 @@ python3 scripts/idle_backfill.py --run --arm P --fmt int4 --N 128 --tag main --r
 python3 scripts/idle_backfill.py --summarize out/backfill
 ```
 
-## 7. What is not reproducible from this repo
+## 7. Lossless weight compression (exact; 32.70 % smaller; 2.70 GB/s per core)
 
-- **The 2-second re-packing check.** Its code, frozen layouts and job lists are not here. The full check ran hundreds of
-  simulation jobs.
+CPU only. It needs numpy and a C compiler (`cc`); the codec builds its C core on first use, into `~/.cache/lossless_bf16/`.
+
+```bash
+python3 scripts/lossless_bf16.py --self-test        # 31 checks on synthetic tensors, no download
+```
+
+The eval set is 36 safetensors files from 13 public Hugging Face model repos. `data/lossless/evalset.json` lists each
+file with its sha256, its size and our container sizes. Put each repo's files in a folder named `<org>__<name>` (for
+example `models/Qwen__Qwen3-4B/`), then:
+
+```bash
+python3 scripts/lossless_bf16.py --roundtrip-v2 models --evalset data/lossless/evalset.json --out rt.json
+python3 scripts/lossless_bf16.py --summarize-v2 rt.json
+```
+
+The round trip checks every input file against the eval set before it encodes anything. It then encodes and decodes each
+file under four settings and checks the sha256 of every decoded file. It also checks that the first setting's container
+sizes equal ours to the byte; the encoder is deterministic. `--only <org>__<name>` runs one repo. A fine-tune's delta rows
+need its base repo (`Qwen__Qwen3-4B` or `Qwen__Qwen3-4B-Base`) in the same folder. In the summary, `models.<name>.INC`
+is the bits per weight of the first setting (16 = no saving, so the saving is 1 − bits / 16) and `E_bar.median_dE` the
+9-bit symbol's extra saving. The README's 32.70 % is the median saving over the 12 bf16 repos; the 13th
+(`mohantesting__Affine-come-…`) is fp16.
+
+Our rows are in `data/lossless/roundtrip_v2.json`, so the summary also runs without a download:
+
+```bash
+python3 scripts/lossless_bf16.py --summarize-v2 data/lossless/roundtrip_v2.json
+```
+
+A small check with one public file (99.6 MB):
+
+```bash
+mkdir -p models/Qwen__Qwen3-4B
+curl -L -o models/Qwen__Qwen3-4B/model-00003-of-00003.safetensors \
+  https://huggingface.co/Qwen/Qwen3-4B/resolve/main/model-00003-of-00003.safetensors
+python3 scripts/lossless_bf16.py --roundtrip-v2 models --evalset data/lossless/evalset.json --only Qwen__Qwen3-4B --out rt_one.json
+```
+
+We ran this from this copy of the code on 2026-10-31. The download matched the eval set's sha256, all four settings
+decoded exactly, and the container sizes matched our rows to the byte (66,922,470 B; 66,054,697 B with the 9-bit symbol).
+
+Decode speed needs whole checkpoints and a many-core host:
+
+```bash
+python3 scripts/lossless_bf16.py --roundtrip models --out rt_v1.json --keep-dir keep --keep-std Qwen__Qwen3-4B
+python3 scripts/lossless_bf16.py --bench keep --out bench.json --base-dir models --ref rt_v1.json
+```
+
+`--bench` times the decode of each kept container at 1–32 threads (5 timed runs each) and checks the output's sha256
+after every run. Our run is in `data/lossless/bench_v1.json`: `bench.cases["Qwen__Qwen3-4B.std"].rows`, then the thread
+count, then `gbps_median`.
+
+## 8. What is not reproducible from this repo
+
+- **The re-packing checks.** That covers the 2-second check, the online memory sizing and the shared pool's simulation
+  results, plus the 10-second layout caveat. Their code, frozen layouts and job lists are not here. One of these checks
+  alone ran 1,187 simulation jobs.
 - **The Aegaeon comparison.** `aegaeon_repro.py` and `steptime_crossover.py` are here because the H100 scorer uses them.
   The comparison itself reads step-time rows from about a dozen earlier GPU runs that are not published, so 2 checks in
   `steptime_crossover.py --self-test` fail without them.
@@ -155,10 +210,11 @@ This is the slim cut: only the code behind the numbers in the README.
 | `scripts/h100_step.py`, `steptime_crossover.py`, `aegaeon_repro.py`, `bench/h100_step/` | § 5 |
 | `scripts/cloud_sim.py`, `idle_backfill.py`, and the 8 modules they import | § 6 |
 | `data/` (four small files) | § 6: the demand summary, size census and lineage census the simulation reads |
+| `scripts/lossless_bf16.py`, `data/lossless/` | § 7: the codec, its eval set, our round-trip rows and our decode bench |
 | `patches/vllm/` | the shared KV pool; the controller does not need them |
 
 Every module has a CPU self-test: `python3 scripts/<module>.py --self-test`. On a fresh clone they all pass except
-`steptime_crossover.py`, which fails the two checks named in § 7. The self-tests do not need the trace bins.
+`steptime_crossover.py`, which fails the two checks named in § 8. The self-tests do not need the trace bins.
 
 ## About this code
 
@@ -187,3 +243,11 @@ rehearsals and both headline jobs give the same results as before.
 
 From a fresh clone plus the trace bins, the two headline jobs (`P` and `BS`, int4, 128 GPUs) reproduce our archived
 rows exactly, apart from the timing fields.
+
+`lossless_bf16.py` got the same clean-up: a new file name, comments and help text without internal references, and new
+names for two flags (`--roundtrip-v2`, `--summarize-v2`) and one summary key (`FAM_le8`). Its round-trip output no longer
+records a private file path. The runs behind § 7 used the old names. Two things still carry an old internal number: the
+container's 8-byte magic (`BBL3283\x01`) and the seeds of two self-test generators. Renaming the magic would change every
+container's bytes, and new seeds would change the self-test's inputs, so both stay. `script_sha256` in
+`data/lossless/roundtrip_v2.json` is the hash of the file before this clean-up. On 2026-10-31 this copy and the file the
+runs used gave the same 31 self-test checks and the same container sizes on the public file in § 7.

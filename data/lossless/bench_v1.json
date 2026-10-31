@@ -1,0 +1,1026 @@
+{
+ "bench": {
+  "cases": {
+   "Qwen__Qwen3-4B.std": {
+    "comp_bytes": 5414826850,
+    "out_bytes": 8044982000,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 3.251665875315666,
+      "gbps_max": 2.7028343594518605,
+      "gbps_median": 2.702331060251993,
+      "gbps_min": 2.7013499430824317,
+      "loadavg": [
+       "0.42",
+       "1.69",
+       "2.93"
+      ],
+      "max_s": 2.9781339587643743,
+      "median_s": 2.9770527076907456,
+      "min_s": 2.9764983458444476,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 0.44787490414455533,
+      "gbps_max": 27.094303774086967,
+      "gbps_median": 27.0559627498994,
+      "gbps_min": 26.975257703829172,
+      "loadavg": [
+       "1.49",
+       "1.73",
+       "2.84"
+      ],
+      "max_s": 0.298235593829304,
+      "median_s": 0.2973459889180958,
+      "min_s": 0.2969252159819007,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 0.3485864531248808,
+      "gbps_max": 33.32561175872617,
+      "gbps_median": 33.301525274531826,
+      "gbps_min": 33.04387854656238,
+      "loadavg": [
+       "2.31",
+       "1.90",
+       "2.89"
+      ],
+      "max_s": 0.24346361123025417,
+      "median_s": 0.24157998571172357,
+      "min_s": 0.24140538088977337,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 1.7787718228064477,
+      "gbps_max": 5.352210571336973,
+      "gbps_median": 5.347959128430263,
+      "gbps_min": 5.328359223129588,
+      "loadavg": [
+       "0.74",
+       "1.66",
+       "2.89"
+      ],
+      "max_s": 1.5098422728478909,
+      "median_s": 1.5043088039383292,
+      "min_s": 1.5031138802878559,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 0.3519054972566664,
+      "gbps_max": 32.95697614320232,
+      "gbps_median": 32.92774622455575,
+      "gbps_min": 32.45207957355202,
+      "loadavg": [
+       "3.29",
+       "2.14",
+       "2.95"
+      ],
+      "max_s": 0.24790343502536416,
+      "median_s": 0.24432227900251746,
+      "min_s": 0.24410558678209782,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 0.3469649637117982,
+      "gbps_max": 32.8735886268496,
+      "gbps_median": 32.84857035266408,
+      "gbps_min": 32.732578175112245,
+      "loadavg": [
+       "3.00",
+       "2.13",
+       "2.94"
+      ],
+      "max_s": 0.24577905097976327,
+      "median_s": 0.24491117615252733,
+      "min_s": 0.2447247877717018,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 1.0296055115759373,
+      "gbps_max": 10.678491127944502,
+      "gbps_median": 10.619441766237587,
+      "gbps_min": 10.583569557352686,
+      "loadavg": [
+       "1.16",
+       "1.70",
+       "2.87"
+      ],
+      "max_s": 0.7601388129405677,
+      "median_s": 0.7575710830278695,
+      "min_s": 0.7533819060772657,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 0.4223729851655662,
+      "gbps_max": 20.11631284639513,
+      "gbps_median": 19.98309440020485,
+      "gbps_min": 19.385262439186597,
+      "loadavg": [
+       "1.35",
+       "1.72",
+       "2.86"
+      ],
+      "max_s": 0.4150050599128008,
+      "median_s": 0.40258940076455474,
+      "min_s": 0.3999232891947031,
+      "verified_every_run": true
+     }
+    }
+   },
+   "huihui-ai__Huihui-Qwen3-4B-abliterated-v2.xd.base-compressed(chained)": {
+    "comp_bytes": 888235192,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [
+       [
+        1966946,
+        "python3",
+        102
+       ]
+      ],
+      "bytes_written": 8044981992,
+      "first_run_s": 5.089833687059581,
+      "gbps_max": 1.5821176625540445,
+      "gbps_median": 1.581110168621198,
+      "gbps_min": 1.5808794701927318,
+      "loadavg": [
+       "4.70",
+       "2.82",
+       "3.04"
+      ],
+      "max_s": 5.088928121142089,
+      "median_s": 5.08818560000509,
+      "min_s": 5.0849454388953745,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.6944726840592921,
+      "gbps_max": 13.870617334271145,
+      "gbps_median": 13.82541907632182,
+      "gbps_min": 13.773835879829637,
+      "loadavg": [
+       "3.03",
+       "2.73",
+       "2.98"
+      ],
+      "max_s": 0.5840770909562707,
+      "median_s": 0.5818978757597506,
+      "min_s": 0.5800017258152366,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.603722816798836,
+      "gbps_max": 16.43611463814289,
+      "gbps_median": 16.332520067435702,
+      "gbps_min": 16.22369516506784,
+      "loadavg": [
+       "4.61",
+       "3.13",
+       "3.11"
+      ],
+      "max_s": 0.4958785227499902,
+      "median_s": 0.4925744440406561,
+      "min_s": 0.48946981504559517,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 2.651299857068807,
+      "gbps_max": 3.039883067475174,
+      "gbps_median": 3.030007055348701,
+      "gbps_min": 3.0193168877044356,
+      "loadavg": [
+       "3.32",
+       "2.72",
+       "2.99"
+      ],
+      "max_s": 2.6645040223374963,
+      "median_s": 2.655103385914117,
+      "min_s": 2.646477451082319,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.6026377766393125,
+      "gbps_max": 16.261935147850647,
+      "gbps_median": 16.234590391336685,
+      "gbps_min": 16.112221121814994,
+      "loadavg": [
+       "3.81",
+       "3.03",
+       "3.07"
+      ],
+      "max_s": 0.49930930882692337,
+      "median_s": 0.4955457327887416,
+      "min_s": 0.49471246311441064,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.6019014469347894,
+      "gbps_max": 16.171060629432866,
+      "gbps_median": 16.1471348559689,
+      "gbps_min": 16.123254211388367,
+      "loadavg": [
+       "3.41",
+       "2.98",
+       "3.05"
+      ],
+      "max_s": 0.49896763311699033,
+      "median_s": 0.4982296898961067,
+      "min_s": 0.49749253783375025,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.6669289437122643,
+      "gbps_max": 5.676481280135602,
+      "gbps_median": 5.647032023265303,
+      "gbps_min": 5.592833951903958,
+      "loadavg": [
+       "2.75",
+       "2.65",
+       "2.96"
+      ],
+      "max_s": 1.438444634899497,
+      "median_s": 1.4246389889158309,
+      "min_s": 1.4172480441629887,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.9216497708112001,
+      "gbps_max": 10.098166567218042,
+      "gbps_median": 9.958615282979583,
+      "gbps_min": 9.827271079850508,
+      "loadavg": [
+       "2.89",
+       "2.69",
+       "2.97"
+      ],
+      "max_s": 0.8186384527944028,
+      "median_s": 0.8078414280898869,
+      "min_s": 0.7966774897649884,
+      "verified_every_run": true
+     }
+    }
+   },
+   "huihui-ai__Huihui-Qwen3-4B-abliterated-v2.xd.base-raw": {
+    "comp_bytes": 888235192,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 2.365902899764478,
+      "gbps_max": 3.7960506204930797,
+      "gbps_median": 3.7950010076831275,
+      "gbps_min": 3.7947577850553325,
+      "loadavg": [
+       "2.70",
+       "2.11",
+       "2.92"
+      ],
+      "max_s": 2.120025163050741,
+      "median_s": 2.119889290072024,
+      "min_s": 2.1193031379953027,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.3786751120351255,
+      "gbps_max": 28.692244664101327,
+      "gbps_median": 28.54414845017259,
+      "gbps_min": 28.319954619720534,
+      "loadavg": [
+       "2.08",
+       "2.03",
+       "2.82"
+      ],
+      "max_s": 0.2840746780857444,
+      "median_s": 0.2818434750661254,
+      "min_s": 0.2803887282498181,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.30911738611757755,
+      "gbps_max": 31.870313330064274,
+      "gbps_median": 31.86695913311641,
+      "gbps_min": 31.701719440872665,
+      "loadavg": [
+       "1.98",
+       "2.01",
+       "2.80"
+      ],
+      "max_s": 0.2537711560726166,
+      "median_s": 0.25245527690276504,
+      "min_s": 0.25242870720103383,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.383885839022696,
+      "gbps_max": 7.017527680088276,
+      "gbps_median": 6.990602399760284,
+      "gbps_min": 6.917137567061125,
+      "loadavg": [
+       "2.24",
+       "2.05",
+       "2.88"
+      ],
+      "max_s": 1.1630507437512279,
+      "median_s": 1.1508281449787319,
+      "min_s": 1.1464125770144165,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.3077702037990093,
+      "gbps_max": 31.89325610044152,
+      "gbps_median": 31.86053605759945,
+      "gbps_min": 31.463189386004338,
+      "loadavg": [
+       "3.03",
+       "2.22",
+       "2.86"
+      ],
+      "max_s": 0.25569505663588643,
+      "median_s": 0.2525061718188226,
+      "min_s": 0.25224711978808045,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.3068578909151256,
+      "gbps_max": 31.729953290174038,
+      "gbps_median": 31.017904220804194,
+      "gbps_min": 26.808849945277142,
+      "loadavg": [
+       "4.29",
+       "2.56",
+       "2.96"
+      ],
+      "max_s": 0.3000868000090122,
+      "median_s": 0.25936575001105666,
+      "min_s": 0.25354534620419145,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.8933741133660078,
+      "gbps_max": 12.164283825139128,
+      "gbps_median": 12.107414392137741,
+      "gbps_min": 12.00624957470437,
+      "loadavg": [
+       "2.10",
+       "2.03",
+       "2.85"
+      ],
+      "max_s": 0.670066196937114,
+      "median_s": 0.6644673859700561,
+      "min_s": 0.6613609241321683,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.553243619389832,
+      "gbps_max": 21.204933972712716,
+      "gbps_median": 19.867780776821277,
+      "gbps_min": 19.32680741842421,
+      "loadavg": [
+       "2.01",
+       "2.01",
+       "2.83"
+      ],
+      "max_s": 0.41626026574522257,
+      "median_s": 0.40492604998871684,
+      "min_s": 0.379391985014081,
+      "verified_every_run": true
+     }
+    }
+   },
+   "memcpy": {
+    "out_bytes": 8044982000,
+    "rows": {
+     "1": {
+      "gbps_max": 19.933433425154643,
+      "gbps_median": 19.926246777326543,
+      "gbps_min": 19.917264419803463,
+      "median_s": 0.40373794874176383
+     },
+     "12": {
+      "gbps_max": 56.7823508289236,
+      "gbps_median": 56.66289245725177,
+      "gbps_min": 56.53780448435334,
+      "median_s": 0.1419797269627452
+     },
+     "16": {
+      "gbps_max": 56.4994880287862,
+      "gbps_median": 56.48094586749302,
+      "gbps_min": 56.46130355543002,
+      "median_s": 0.1424370976164937
+     },
+     "2": {
+      "gbps_max": 29.668235334390864,
+      "gbps_median": 28.69443166953365,
+      "gbps_min": 28.425123589310527,
+      "median_s": 0.28036735812202096
+     },
+     "24": {
+      "gbps_max": 54.88247040682556,
+      "gbps_median": 54.867672758266046,
+      "gbps_min": 54.85746226315857,
+      "median_s": 0.14662517281249166
+     },
+     "32": {
+      "gbps_max": 54.85990604563004,
+      "gbps_median": 54.85494781057503,
+      "gbps_min": 54.81186538649398,
+      "median_s": 0.14665918610990047
+     },
+     "4": {
+      "gbps_max": 40.56039390921992,
+      "gbps_median": 33.464880227316264,
+      "gbps_min": 29.25177236920714,
+      "median_s": 0.24040074087679386
+     },
+     "8": {
+      "gbps_max": 54.18508065153738,
+      "gbps_median": 36.852372336747315,
+      "gbps_min": 36.26354557649372,
+      "median_s": 0.21830296097323298
+     }
+    }
+   },
+   "mohantesting__Affine-come-5E7staNhMMEq6yzwx8F2hNPJ6SWvGvbvAv4RsXwQ3bNV65cQ.std": {
+    "comp_bytes": 5459593242,
+    "out_bytes": 8044981592,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 5.867097259964794,
+      "gbps_max": 1.4380380089068971,
+      "gbps_median": 1.4368349123558186,
+      "gbps_min": 1.4349846769810677,
+      "loadavg": [
+       "2.77",
+       "2.86",
+       "3.01"
+      ],
+      "max_s": 5.606318813748658,
+      "median_s": 5.599099467042834,
+      "min_s": 5.594415128231049,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 0.7440111660398543,
+      "gbps_max": 14.573440073269499,
+      "gbps_median": 14.548319940369774,
+      "gbps_min": 14.508547989513982,
+      "loadavg": [
+       "2.33",
+       "2.56",
+       "2.87"
+      ],
+      "max_s": 0.554499430116266,
+      "median_s": 0.5529835489578545,
+      "min_s": 0.5520303752273321,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 0.4851879058405757,
+      "gbps_max": 17.863419788687104,
+      "gbps_median": 17.832579878951066,
+      "gbps_min": 17.58587531475346,
+      "loadavg": [
+       "2.89",
+       "2.67",
+       "2.90"
+      ],
+      "max_s": 0.45746836299076676,
+      "median_s": 0.4511395236477256,
+      "min_s": 0.4503606637008488,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 3.0862231417559087,
+      "gbps_max": 2.8695835975134156,
+      "gbps_median": 2.864436245141507,
+      "gbps_min": 2.84792187598575,
+      "loadavg": [
+       "1.83",
+       "2.59",
+       "2.91"
+      ],
+      "max_s": 2.82486035162583,
+      "median_s": 2.808574149850756,
+      "min_s": 2.803536233957857,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 0.5275675351731479,
+      "gbps_max": 17.580422356067658,
+      "gbps_median": 17.559697846456142,
+      "gbps_min": 17.443895437612152,
+      "loadavg": [
+       "4.51",
+       "3.05",
+       "3.03"
+      ],
+      "max_s": 0.4611918032169342,
+      "median_s": 0.4581503430381417,
+      "min_s": 0.45761025696992874,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 0.5672924462705851,
+      "gbps_max": 17.299259627679024,
+      "gbps_median": 17.29359106725713,
+      "gbps_min": 17.284356570496232,
+      "loadavg": [
+       "5.35",
+       "3.31",
+       "3.11"
+      ],
+      "max_s": 0.46544871712103486,
+      "median_s": 0.46520017506554723,
+      "min_s": 0.46504773991182446,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 1.694666972849518,
+      "gbps_max": 5.649169227903086,
+      "gbps_median": 5.640508447092865,
+      "gbps_min": 5.614022256704765,
+      "loadavg": [
+       "1.61",
+       "2.47",
+       "2.86"
+      ],
+      "max_s": 1.4330156212672591,
+      "median_s": 1.4262865958735347,
+      "min_s": 1.4240999459289014,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044981592,
+      "first_run_s": 0.9977422966621816,
+      "gbps_max": 10.636023699398885,
+      "gbps_median": 10.588444275296025,
+      "gbps_min": 10.481645946598398,
+      "loadavg": [
+       "1.99",
+       "2.50",
+       "2.86"
+      ],
+      "max_s": 0.7675303700380027,
+      "median_s": 0.7597888209857047,
+      "min_s": 0.7563899648375809,
+      "verified_every_run": true
+     }
+    }
+   },
+   "vera6__affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g.xd.base-compressed(chained)": {
+    "comp_bytes": 4932619636,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 6.49471523379907,
+      "gbps_max": 1.294912948092477,
+      "gbps_median": 1.2946076089797023,
+      "gbps_min": 1.2945180543460106,
+      "loadavg": [
+       "4.01",
+       "2.99",
+       "2.97"
+      ],
+      "max_s": 6.214654144831002,
+      "median_s": 6.214224245399237,
+      "min_s": 6.2127589378505945,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.7814216651022434,
+      "gbps_max": 12.756126340005657,
+      "gbps_median": 12.7205622224179,
+      "gbps_min": 12.629860039805651,
+      "loadavg": [
+       "2.45",
+       "2.61",
+       "2.82"
+      ],
+      "max_s": 0.6369810882024467,
+      "median_s": 0.6324391840025783,
+      "min_s": 0.6306759417057037,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.6368980430997908,
+      "gbps_max": 15.60790336783071,
+      "gbps_median": 15.592554273563065,
+      "gbps_min": 15.457764750547245,
+      "loadavg": [
+       "3.15",
+       "2.75",
+       "2.86"
+      ],
+      "max_s": 0.5204492448829114,
+      "median_s": 0.5159502318128943,
+      "min_s": 0.5154428370296955,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 3.4430036791600287,
+      "gbps_max": 2.542505828232987,
+      "gbps_median": 2.540254984312421,
+      "gbps_min": 2.526447650899263,
+      "loadavg": [
+       "2.43",
+       "2.72",
+       "2.87"
+      ],
+      "max_s": 3.1843058331869543,
+      "median_s": 3.166997817810625,
+      "min_s": 3.16419412009418,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.639887017197907,
+      "gbps_max": 15.17276774689785,
+      "gbps_median": 15.165959319484086,
+      "gbps_min": 15.159788320424585,
+      "loadavg": [
+       "2.67",
+       "2.66",
+       "2.83"
+      ],
+      "max_s": 0.5306790452450514,
+      "median_s": 0.5304631129838526,
+      "min_s": 0.530225079972297,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.6333847148343921,
+      "gbps_max": 15.028389161743437,
+      "gbps_median": 15.016555736273588,
+      "gbps_min": 14.994894991956633,
+      "loadavg": [
+       "2.52",
+       "2.63",
+       "2.82"
+      ],
+      "max_s": 0.5365147269330919,
+      "median_s": 0.5357408272102475,
+      "min_s": 0.535318982321769,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.8697234047576785,
+      "gbps_max": 5.045379234395976,
+      "gbps_median": 5.036588414532494,
+      "gbps_min": 4.993080076528237,
+      "loadavg": [
+       "1.89",
+       "2.55",
+       "2.81"
+      ],
+      "max_s": 1.6112263109534979,
+      "median_s": 1.5973078063689172,
+      "min_s": 1.5945247360505164,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.0903428979218006,
+      "gbps_max": 9.321916532018257,
+      "gbps_median": 9.292669412212492,
+      "gbps_min": 9.263172863588581,
+      "loadavg": [
+       "2.16",
+       "2.57",
+       "2.81"
+      ],
+      "max_s": 0.8684909706935287,
+      "median_s": 0.8657342293299735,
+      "min_s": 0.863018024712801,
+      "verified_every_run": true
+     }
+    }
+   },
+   "vera6__affine-hoh-5FjZYkzVtjQH6q2qefVePKFr7h1cwthpDEA2NMy6BGopDi9g.xd.base-raw": {
+    "comp_bytes": 4932619636,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 3.502003361005336,
+      "gbps_max": 2.487004636424787,
+      "gbps_median": 2.4850895050339505,
+      "gbps_min": 2.4836198518430965,
+      "loadavg": [
+       "2.17",
+       "2.78",
+       "2.94"
+      ],
+      "max_s": 3.2392163341864944,
+      "median_s": 3.237300699111074,
+      "min_s": 3.2348077981732786,
+      "verified_every_run": true
+     },
+     "12": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.4724028501659632,
+      "gbps_max": 23.631843385644633,
+      "gbps_median": 23.60787255597602,
+      "gbps_min": 23.442793499332957,
+      "loadavg": [
+       "2.33",
+       "2.61",
+       "2.86"
+      ],
+      "max_s": 0.3431750568561256,
+      "median_s": 0.3407753906212747,
+      "min_s": 0.34042972698807716,
+      "verified_every_run": true
+     },
+     "16": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.37054532626643777,
+      "gbps_max": 29.005045032697982,
+      "gbps_median": 28.946920799249156,
+      "gbps_min": 28.87013633831273,
+      "loadavg": [
+       "2.94",
+       "2.74",
+       "2.90"
+      ],
+      "max_s": 0.2786610322073102,
+      "median_s": 0.27792185731232166,
+      "min_s": 0.2773649198934436,
+      "verified_every_run": true
+     },
+     "2": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.8946672095917165,
+      "gbps_max": 4.829006058935727,
+      "gbps_median": 4.8270798060783,
+      "gbps_min": 4.822152907490279,
+      "loadavg": [
+       "1.79",
+       "2.61",
+       "2.88"
+      ],
+      "max_s": 1.668338218703866,
+      "median_s": 1.6666353810578585,
+      "min_s": 1.6659705732017756,
+      "verified_every_run": true
+     },
+     "24": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.3670728332363069,
+      "gbps_max": 27.9916816796399,
+      "gbps_median": 27.945321246515878,
+      "gbps_min": 27.88384232833881,
+      "loadavg": [
+       "2.65",
+       "2.68",
+       "2.88"
+      ],
+      "max_s": 0.28851769771426916,
+      "median_s": 0.28788296692073345,
+      "min_s": 0.28740616887807846,
+      "verified_every_run": true
+     },
+     "32": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.35868733609095216,
+      "gbps_max": 27.526237348495318,
+      "gbps_median": 27.446729574504346,
+      "gbps_min": 27.381640731900696,
+      "loadavg": [
+       "2.27",
+       "2.60",
+       "2.85"
+      ],
+      "max_s": 0.293809347320348,
+      "median_s": 0.29311258997768164,
+      "min_s": 0.29226595303043723,
+      "verified_every_run": true
+     },
+     "4": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 1.110528017859906,
+      "gbps_max": 9.546225385922781,
+      "gbps_median": 9.505564430227539,
+      "gbps_min": 9.42921879540015,
+      "loadavg": [
+       "1.79",
+       "2.56",
+       "2.85"
+      ],
+      "max_s": 0.8531970852054656,
+      "median_s": 0.8463444807566702,
+      "min_s": 0.8427395820617676,
+      "verified_every_run": true
+     },
+     "8": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 0.5789904491975904,
+      "gbps_max": 17.46989009092515,
+      "gbps_median": 17.421923859360152,
+      "gbps_min": 17.17335665687748,
+      "loadavg": [
+       "1.90",
+       "2.54",
+       "2.84"
+      ],
+      "max_s": 0.4684571661055088,
+      "median_s": 0.46177345607429743,
+      "min_s": 0.4605055870488286,
+      "verified_every_run": true
+     }
+    }
+   }
+  },
+  "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+  "finished": "2026-10-30T12:19:33Z",
+  "grid": [
+   1,
+   2,
+   4,
+   8,
+   12,
+   16,
+   24,
+   32
+  ],
+  "nproc": 32,
+  "runs": 5,
+  "started": "2026-10-30T12:01:54Z"
+ },
+ "rerun_of_flagged_block": {
+  "cases": {
+   "Qwen__Qwen3-4B.std": {
+    "comp_bytes": 5414826850,
+    "out_bytes": 8044982000,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044982000,
+      "first_run_s": 3.2501472691074014,
+      "gbps_max": 2.700857353620031,
+      "gbps_median": 2.7004025275714123,
+      "gbps_min": 2.6993939697825025,
+      "loadavg": [
+       "1.95",
+       "2.57",
+       "2.79"
+      ],
+      "max_s": 2.9802919062785804,
+      "median_s": 2.9791788142174482,
+      "min_s": 2.9786771186627448,
+      "verified_every_run": true
+     }
+    }
+   },
+   "huihui-ai__Huihui-Qwen3-4B-abliterated-v2.xd.base-compressed(chained)": {
+    "comp_bytes": 888235192,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 5.376521857921034,
+      "gbps_max": 1.5820528185736367,
+      "gbps_median": 1.5813786945597321,
+      "gbps_min": 1.580966021666707,
+      "loadavg": [
+       "1.40",
+       "2.19",
+       "2.62"
+      ],
+      "max_s": 5.0886495229788125,
+      "median_s": 5.087321600876749,
+      "min_s": 5.08515385678038,
+      "verified_every_run": true
+     }
+    }
+   },
+   "huihui-ai__Huihui-Qwen3-4B-abliterated-v2.xd.base-raw": {
+    "comp_bytes": 888235192,
+    "out_bytes": 8044981992,
+    "rows": {
+     "1": {
+      "busy_others": [],
+      "bytes_written": 8044981992,
+      "first_run_s": 2.3590044979937375,
+      "gbps_max": 3.810570521623434,
+      "gbps_median": 3.8094351725040783,
+      "gbps_min": 3.805554544644549,
+      "loadavg": [
+       "1.38",
+       "2.26",
+       "2.66"
+      ],
+      "max_s": 2.1140104280784726,
+      "median_s": 2.1118569099344313,
+      "min_s": 2.1112276879139245,
+      "verified_every_run": true
+     }
+    }
+   },
+   "memcpy": {
+    "out_bytes": 8044982000,
+    "rows": {
+     "1": {
+      "gbps_max": 19.72879703086568,
+      "gbps_median": 19.698533359183443,
+      "gbps_min": 19.625500990045254,
+      "median_s": 0.4084051260724664
+     }
+    }
+   }
+  },
+  "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+  "finished": "2026-10-30T12:23:03Z",
+  "grid": [
+   1
+  ],
+  "nproc": 32,
+  "runs": 5,
+  "started": "2026-10-30T12:20:29Z"
+ },
+ "script": "the v1 codec, an earlier revision of scripts/lossless_bf16.py (v2 added the D and E arms; the v1 container format is unchanged)",
+ "what": "Wake-time decode bench of the v1 codec on one 16-core CPU host. GB/s = decoded output bytes (1e9) per second; median of 5 timed runs after 1 warm-up; the output sha256 was checked after every timed run."
+}
