@@ -1,6 +1,6 @@
 {
  "version": "v1",
- "note": "Frozen with reports/multigpu_probe_prereg_2026-10-14.md. Sizes from the HF API (read 2026-10-14). est_min feeds the driver's budget guard.",
+ "note": "Frozen 2026-10-14 under a pre-registration (kept private). Sizes from the HF API (read 2026-10-14). est_min feeds the driver's budget guard.",
  "models": {
   "q8": {
    "repo": "Qwen/Qwen3-8B",
