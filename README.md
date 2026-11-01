@@ -1,6 +1,28 @@
 # gpu-bunk
 
-Many quiet AI models, fewer idle GPUs.
+More AI models on the same GPUs: busy ones packed together, quiet ones asleep until called.
+
+## Direction
+
+We started with quiet models. The bigger prize is busy ones.
+
+A provider's GPU cluster often serves one or two popular mixture-of-experts (MoE) models. An MoE keeps every expert in
+GPU memory but uses only a few of them per token, so its GPUs tend to run out of memory long before they run out of
+compute. The aim now is to fit more busy models on the same cluster, say four where there were two, and to measure how
+much room a provider really has. Our own fleet simulation already pointed this way: most of the extra requests that
+sharing served came from one busy model, not from the quiet ones (see below).
+
+Sleeping quiet models stays in the plan, as an extra layer. Once the busy models are packed, the memory and the idle
+hours left over can host the long tail.
+
+Next:
+
+1. A census: which MoEs carry real traffic, how much memory each needs, and which pairs or groups fit on 1, 2, 4, 8 and
+   16 GPUs.
+2. A packing plan per cluster size, checked against a public traffic trace.
+3. One end-to-end run on a full 8-GPU NVLink node.
+
+None of the busy-model packing is measured yet. Everything below is the quiet-model work.
 
 ## What it is
 
