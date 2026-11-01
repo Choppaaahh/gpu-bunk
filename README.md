@@ -16,10 +16,17 @@ memory-bound, and those can share GPUs.
 So the aim is: dedicated copies for the busiest models, placed by load; one shared pool that takes their overflow and
 fills their off-peak hours; memory-bound models packed together; and the long tail asleep in host RAM, as below.
 
+One more lever the census found: a busy model's own cold parameters. In DeepSeek V4.1 Flash, 203 GB of the 510 GB
+checkpoint is two hash-indexed n-gram lookup tables ("Engram", read from the safetensors headers). If those tables
+live in host RAM, the model fits on 8 H100s instead of 16. DeepSeek's reference code shards the tables across GPUs
+today, so this is a lever to build and measure, not a result.
+
 Next:
 
-1. A simulation of one shared overflow pool next to dedicated copies, on a public traffic trace.
+1. A simulation of both cases on a public traffic trace: compute-bound models on dedicated copies plus one shared
+   overflow pool, and memory-bound models packed together.
 2. One end-to-end run on a full 8-GPU NVLink node.
+3. A probe of the Engram tables in host RAM.
 
 The census rests on one throughput calibration point, so models near the line can flip either way. None of the
 busy-model placement is measured yet. Everything below is the quiet-model work.
