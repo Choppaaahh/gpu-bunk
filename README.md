@@ -79,7 +79,7 @@ The target is a 10-second p95 time to first token. Ranges cover 21 replays of th
 - Idle is counted in one-minute buckets, so the real idle share is higher than shown.
 - These results hold for one layout of models on GPUs. We re-packed the fleet 40 times, each time without one model that
   got no traffic (two sets of 20). Sharing hosted more models and served more requests within the target every time.
-  The smaller idle time held in only 13 of 20 and 15 of 20. At the main layout the two idle ranges are 0.1 point apart
+  The idle ranges stayed apart in only 13 of 20 and 15 of 20; in the rest they overlap, though sharing's idle was lower in every paired replay. At the main layout the two idle ranges are 0.1 point apart
   (59.9 % vs 60.0 %).
 - Selling idle GPU-minutes as interruptible batch work recovers 96–97 % of the default's idle time (12,500–13,000 GPU-hours
   a week). No hosted model misses the 10-second target. This assumes someone buys all of that batch time.
