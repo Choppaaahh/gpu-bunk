@@ -1,28 +1,28 @@
 # gpu-bunk
 
-More AI models on the same GPUs: busy ones packed together, quiet ones asleep until called.
+More AI models on the same GPUs: busy ones placed by load, quiet ones asleep until called.
 
 ## Direction
 
-We started with quiet models. The bigger prize is busy ones.
+We started with quiet models. The bigger prize is busy ones, and our first census changed what "packing" them means.
 
-A provider's GPU cluster often serves one or two popular mixture-of-experts (MoE) models. An MoE keeps every expert in
-GPU memory but uses only a few of them per token, so its GPUs tend to run out of memory long before they run out of
-compute. The aim now is to fit more busy models on the same cluster, say four where there were two, and to measure how
-much room a provider really has. Our own fleet simulation already pointed this way: most of the extra requests that
-sharing served came from one busy model, not from the quiet ones (see below).
+We checked 40 open mixture-of-experts (MoE) models against one week of public OpenRouter traffic (2026-10-25 to
+10-31) and their own Hugging Face configs. The busiest ones are limited by compute, not memory: 20 of the 24 ranked
+MoEs need more than one copy's worth of compute per provider. Putting a second busy model on their main copies would
+only take capacity away. The room for busy models is in time and in leftovers instead. DeepSeek's own published fleet
+numbers put a peak-sized fleet about a fifth idle on average, and a model that needs 1.04 copies still runs 2. Four less-busy MoEs are
+memory-bound, and those can share GPUs.
 
-Sleeping quiet models stays in the plan, as an extra layer. Once the busy models are packed, the memory and the idle
-hours left over can host the long tail.
+So the aim is: dedicated copies for the busiest models, placed by load; one shared pool that takes their overflow and
+fills their off-peak hours; memory-bound models packed together; and the long tail asleep in host RAM, as below.
 
 Next:
 
-1. A census: which MoEs carry real traffic, how much memory each needs, and which pairs or groups fit on 1, 2, 4, 8 and
-   16 GPUs.
-2. A packing plan per cluster size, checked against a public traffic trace.
-3. One end-to-end run on a full 8-GPU NVLink node.
+1. A simulation of one shared overflow pool next to dedicated copies, on a public traffic trace.
+2. One end-to-end run on a full 8-GPU NVLink node.
 
-None of the busy-model packing is measured yet. Everything below is the quiet-model work.
+The census rests on one throughput calibration point, so models near the line can flip either way. None of the
+busy-model placement is measured yet. Everything below is the quiet-model work.
 
 ## What it is
 
